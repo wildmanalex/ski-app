@@ -1,41 +1,128 @@
-var mainVm = new Vue({
-    el: '#app',
-
-    data: {
-		temp:0,
+var myRouter = new VueRouter({
+	data: {
+		// temp:0,
+		// precip:0,
+		// visi:0,
+		// wind:0,
+		// userinput:'',
+		// skiareas: {
+		// 	breckenridge:{lat:39.480724,lng:-106.066238},
+		// 	keystone: {lat:39.605011, lng:-105.953438}
+		// }
     },
 	methods: {
-		// 	get('/getdata', function(data, status) {
-		// 		data = JSON.parse(data)
-		// 		console.log(data)
-		// 	// axios.get('https://api.darksky.net/forecast/aac5cc16d61365dd24ade4fc5dcd3681/37.8267,-122.4233', (currenttemp) =>{
-		// 	})
-		//  }
-			request: function (response) {
-				console.log('got to the vue page')
-			 	$.get('/getdata', (dataFromServer) => {
-					console.log(dataFromServer)
-				//   this.temp = response
-				})
-		  	}
+			// request: function (response) {
+			//
+			// 	$.get('/getdata', (dataFromServer) => {
+			// 		// console.log(dataFromServer)
+			// 		this.temp = dataFromServer.currently.apparentTemperature
+			// 		this.precip = dataFromServer.currently.precipProbability
+			// 		this.visi = dataFromServer.currently.visibility
+			// 		this.wind = dataFromServer.currently.windSpeed
+			// 	//   this.temp = response
+			// 	})
+			// 	$.get('getLiftData', (liftdata) => {
+			// 		console.log(liftdata)
+			// 	})
+			// 	this.userinput = ($('#locationTextField').val())
+			// }
+	},
+    routes: [
+		{
+		path: '/skiArea/:location',
+		component: function(resolve, reject) {
+			// console.log(this.wind)
+			$.get('/skiarea.html', function(htmlFromServer){
+				var newComponent = {
+					template: htmlFromServer,
+					data: function(){
+						return {
+							forecast:0,
+							lifts:null,
+							snowdepth:null,
+							facebook:null,
+							wind:0,
+						}
+					},
+					created: function(){
+						console.log('created the ski area component')
+						$.get('/getdata', (dataFromServer) => {
+							// console.log(dataFromServer)
+							// console.log(dataFromServer)
+							// this.temp = dataFromServer.currently.apparentTemperature
+							// this.precip = dataFromServer.currently.precipProbability
+							// this.visi = dataFromServer.currently.visibility
+							// this.wind = dataFromServer.currently.windSpeed
+						//   this.temp = response
+						})
+					},
+					destroyed: function(){ console.log('destroyed the ski area component')}
+				}
+				resolve(newComponent)
+			})
+		}
 	}
+	],
+	// methods: {
+	// 		show: function(){
+	//
+	// 		},
+	// 		request: function (response) {
+	//
+	// 		 	$.get('/getdata', (dataFromServer) => {
+	// 				// console.log(dataFromServer)
+	// 				this.temp = dataFromServer.currently.apparentTemperature
+	// 				this.precip = dataFromServer.currently.precipProbability
+	// 				this.visi = dataFromServer.currently.visibility
+	// 				this.wind = dataFromServer.currently.windSpeed
+	// 			//   this.temp = response
+	// 			})
+	// 			$.get('getLiftData', (liftdata) => {
+	// 				console.log(liftdata)
+	// 			})
+	// 			this.userinput = ($('#locationTextField').val())
+	// 	  	},
+	//
+	//
+	// }
 })
 
-//
-//
-// export default {
-//    data() {
-// 	 return {
-// 	   quote: ''
-// 	 }
-//    },
-//    methods: {
-// 	 getQuote() {
-// 	   this.$http
-// 		 .get('http://localhost:3001/api/random-quote', (data) => {
-// 		   this.quote = data;
-// 		 })
-// 		 .error((err) => console.log(err))
-// 	 }
-//    }
-//  }
+var mainVm = new Vue({
+    el: '#app',
+	router: myRouter,
+    data: {
+		temp:0,
+		precip:0,
+		visi:0,
+		wind:0,
+		userinput:'',
+		skiareas: {
+			breckenridge:{lat:39.480724,lng:-106.066238},
+			keystone: {lat:39.605011, lng:-105.953438}
+		}
+    },
+	methods: {
+			show: function(){
+
+			},
+			request: function (response) {
+				//
+				// 	$.get('/getdata', (dataFromServer) => {
+				// 	// console.log(dataFromServer)
+				// 	this.temp = dataFromServer.currently.apparentTemperature
+				// 	this.precip = dataFromServer.currently.precipProbability
+				// 	this.visi = dataFromServer.currently.visibility
+				// 	this.wind = dataFromServer.currently.windSpeed
+				// //   this.temp = response
+				// })
+				// $.get('getLiftData', (liftdata) => {
+				// 	console.log(liftdata)
+				// })
+				// this.userinput = ($('#locationTextField').val())
+		  	},
+
+
+	}
+})
+// how to organize the vue app, global variables, componentRestrictions
+//vue cli, webpack handles SPA

@@ -2,17 +2,88 @@
 <html>
 <head>
 	<script src="https://unpkg.com/vue"></script>
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-	<link rel='stylesheet' type="text/css" href="main.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+	<link rel='stylesheet' type="text/css" href="main.css">
 
 </head>
 <body>
 	<div id="app">
-		<button v-on:click="request">data</button>
-		{{ temp }}
+		<div class="header">
+
+			<!-- <img src="https://static.pexels.com/photos/416714/pexels-photo-416714.jpeg" class="img-fluid" alt="Responsive image"> -->
+
+		</div>
+		<div class="space">
+		</div>
+		<center>
+			{{userinput}}
+   			<input id="locationTextField" type="text" size="50" onfocus="this.value=''" v-model='userinput'>
+
+			<button type="button" class="btn btn-primary" v-on:click="request" >Get Current Weather</button>
+			<p>
+
+			</p>
+		</center>
+
+		<!-- <button v-on:click="request">data</button> -->
+		<!-- <div class="row">
+		  <div class="col">
+			  <div>
+				  Current Temperature
+			  </div>
+			  {{temp}}
+		  </div>
+		  <div class="col">
+			  <div>
+				Precipitation Probability
+			  </div>
+			  {{precip}}
+		  </div>
+		  <div class="col">
+			  <div>
+				Visibility
+			  </div>
+			  {{visi}}
+		  </div>
+		  <div class="col">
+			  <div>
+				Wind Speed
+			  </div>
+			  {{snow}}
+		  </div>
+		</div> -->
+
+
+		<div class="btn-group">
+  			<button class="btn btn-secondary btn-lg" type="button">
+    			Large button
+  			</button>
+  			<button type="button" class="btn btn-lg btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    			<span class="sr-only">Toggle Dropdown</span>
+  			</button>
+  			<div class="dropdown-menu">
+				<a class="dropdown-item" href="#" ><router-link to="/skiArea/breck" v-on:click="request">breck</router-link></a>
+  			</div>
+		</div>
+		<router-view></router-view>
 	</div>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+        <script>
+            function init() {
+                var input = document.getElementById('locationTextField');
+                var autocomplete = new google.maps.places.Autocomplete(input);
+            }
+            google.maps.event.addDomListener(window, 'load', init);
+        </script>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 	<script src="main.js"></script>
 </body>
 </html>
+
+<!-- temp, precipitation proba, visibility, wind speed -->

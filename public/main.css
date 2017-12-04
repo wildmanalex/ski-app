@@ -1,0 +1,47 @@
+.space {
+	height: 2rem;
+}
+.header {
+	height: 25vh;
+	width: auto;
+	/*background-image:url('https://static.pexels.com/photos/416714/pexels-photo-416714.jpeg');*/
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+.areaContainer {
+  border:1px solid black;
+  height:30rem;
+  width:25rem;
+/*   display:flex; */
+  justify-content:center;
+}
+.forcastSnow {
+  display:flex;
+  flex-direction: row;
+  align-content:stretch;
+}
+.forcast {
+  width:50%;
+}
+.snow {
+  width: 50%;
+}
+.fbLiftData {
+  display:flex;
+  flex-direction: row;
+  align-content:stretch;
+}
+.facebook {
+  width:50%;
+}
+.snow {
+  width:50%;
+}
+.title {
+  margin:auto;
+}
