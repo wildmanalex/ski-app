@@ -1,16 +1,20 @@
 <div class="container-fluid">
 	<div class="areaContainer">
 	  <div class="col-lg-12">
-		<h1 class='title'>Name of Ski Area</h1>
+		<h1 class='title'>{{$route.params.location}}</h1>
 		 <div class="forcastSnow">
 		   <div class='forcast'>
-			 <h3>Forcast for {{$route.params.location}}</h3>
+			 <p>Forcast</p>
 				<ul>
-				  <li>Mon</li>
-				  <li>Tues</li>
+				  <li>{{firstDay.day}}{{firstDay.icon}}{{firstDay.lowTemp}}{{firstDay.highTemp}}</li>
+				  <li>{{secondDay.day}}{{secondDay.icon}}{{secondDay.lowTemp}}{{secondDay.highTemp}}</li>
+				  <li>{{thirdDay.day}}{{thirdDay.icon}}{{thirdDay.lowTemp}}{{thirdDay.highTemp}}</li>
+				  <li>{{fourthDay.day}}{{fourthDay.icon}}{{fourthDay.lowTemp}}{{fourthDay.highTemp}}</li>
+				  <li>{{fifthDay.day}}{{fifthDay.icon}}{{fifthDay.lowTemp}}{{fifthDay.highTemp}}</li>
+				  <!-- <li>Tues</li>
 				  <li>Wed</li>
 				  <li>Thur</li>
-				  <li>{{wind}}</li>
+				  <li>{{forecast}}</li> -->
 				 </ul>
 		   </div>
 		   <div class='snow'>
@@ -22,7 +26,7 @@
 			 <p>this is where the facebook data will go</p>
 		   </div>
 		   <div class="liftdata">
-			 <p>this is where the lift data will go</p>
+			 <p>{{lifts}}</p>
 		   </div>
 		</div>
 	  </div>

@@ -17,7 +17,7 @@
   border:1px solid black;
   height:30rem;
   width:25rem;
-/*   display:flex; */
+  display:flex;
   justify-content:center;
 }
 .forcastSnow {
@@ -38,10 +38,11 @@
 }
 .facebook {
   width:50%;
+  margin-top: 5rem;
+}
+.liftdata {
+	margin-top: 5rem;
 }
 .snow {
   width:50%;
-}
-.title {
-  margin:auto;
 }

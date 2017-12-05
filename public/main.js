@@ -37,23 +37,75 @@ var myRouter = new VueRouter({
 					template: htmlFromServer,
 					data: function(){
 						return {
-							forecast:0,
+							summary:'',
+							firstDay:{
+								day:'',
+								icon:'',
+								lowTemp:'',
+								highTemp:'',
+							},
+							secondDay:{
+								day:'',
+								icon:'',
+								lowTemp:'',
+								highTemp:'',
+							},
+							thirdDay:{
+								day:'',
+								icon:'',
+								lowTemp:'',
+								highTemp:'',
+							},
+							fourthDay:{
+								day:'',
+								icon:'',
+								lowTemp:'',
+								highTemp:'',
+							},
+							fifthDay:{
+								day:'',
+								icon:'',
+								lowTemp:'',
+								highTemp:'',
+							},
 							lifts:null,
 							snowdepth:null,
 							facebook:null,
-							wind:0,
+							day:'',
 						}
 					},
 					created: function(){
 						console.log('created the ski area component')
-						$.get('/getdata', (dataFromServer) => {
-							// console.log(dataFromServer)
-							// console.log(dataFromServer)
-							// this.temp = dataFromServer.currently.apparentTemperature
-							// this.precip = dataFromServer.currently.precipProbability
-							// this.visi = dataFromServer.currently.visibility
-							// this.wind = dataFromServer.currently.windSpeed
-						//   this.temp = response
+						$.get('/getdata', (fullData) => {
+							console.log(fullData)
+							// this.day = new Date(fullData.day)
+							this.firstDay.day = (moment.unix(fullData.forecast.firstDay.day).format('dddd'));
+							this.firstDay.icon = fullData.forecast.firstDay.icon
+							this.firstDay.lowTemp = fullData.forecast.firstDay.lowTemp
+							this.firstDay.highTemp = fullData.forecast.firstDay.highTemp
+							//secondDay
+							this.secondDay.day = (moment.unix(fullData.forecast.secondDay.day).format('dddd'));
+							this.secondDay.icon = fullData.forecast.firstDay.icon
+							this.secondDay.lowTemp = fullData.forecast.firstDay.lowTemp
+							this.secondDay.highTemp = fullData.forecast.firstDay.highTemp
+							//thirdDay
+							this.thirdDay.day = (moment.unix(fullData.forecast.thirdDay.day).format('dddd'));
+							this.thirdDay.icon = fullData.forecast.firstDay.icon
+							this.thirdDay.lowTemp = fullData.forecast.firstDay.lowTemp
+							this.thirdDay.highTemp = fullData.forecast.firstDay.highTemp
+							//fourthDay
+							this.fourthDay.day = (moment.unix(fullData.forecast.fourthDay.day).format('dddd'));
+							this.fourthDay.icon = fullData.forecast.firstDay.icon
+							this.fourthDay.lowTemp = fullData.forecast.firstDay.lowTemp
+							this.fourthDay.highTemp = fullData.forecast.firstDay.highTemp
+							//fifthDay
+							this.fifthDay.day = (moment.unix(fullData.forecast.fifthDay.day).format('dddd'));
+							this.fifthDay.icon = fullData.forecast.firstDay.icon
+							this.fifthDay.lowTemp = fullData.forecast.firstDay.lowTemp
+							this.fifthDay.highTemp = fullData.forecast.firstDay.highTemp
+							// console.log(this.day)
+							this.summary = fullData.forecast.summary
+							this.lifts = "There are " + fullData.lifts.open + " lifts open and  " + fullData.lifts.closed +" closed"
 						})
 					},
 					destroyed: function(){ console.log('destroyed the ski area component')}
