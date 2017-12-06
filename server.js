@@ -5,6 +5,21 @@ const cheerio = require('cheerio')
 const app = express()
 const moment = require('moment')
 const secrets = require('./secrets.js')
+const mongoose = require('mongoose')
+
+//connect to mongoose
+mongoose.connect('mongodb://localhost:27017/peakchoice')
+
+let skiAreaSchema = new mongoose.Schema({
+	name: { type: String, required: true },
+	lat: Number,
+	lng: Number,
+	fourSquareID:{ type: String, required: true },
+	liftieName: { type: String, reuired: false},
+});
+
+let skiAreaModel = mongoose.model('SkiArea', skiAreaSchema);
+
 
 app.use(express.static('./public'))
 app.use(express.static('./'))
