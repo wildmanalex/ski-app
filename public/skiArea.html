@@ -4,7 +4,7 @@
 		<h1 class='title'>{{$route.params.location}}</h1>
 		 <div class="forcastSnow">
 		   <div class='forcast'>
-			 <p>Forcast</p>
+			 <p>Forecast</p>
 				<ul>
 				  <li>{{firstDay.day}}{{firstDay.icon}}{{firstDay.lowTemp}}{{firstDay.highTemp}}</li>
 				  <li>{{secondDay.day}}{{secondDay.icon}}{{secondDay.lowTemp}}{{secondDay.highTemp}}</li>
@@ -18,12 +18,12 @@
 				 </ul>
 		   </div>
 		   <div class='snow'>
-			 <p> This is where the snow information will go</p>
+			 <p>There has been {{snowfall}} centimeters of snow in the last 24 hours</p>
 		   </div>
 		 </div>
 		 <div class="fbLiftData">
 		   <div class="facebook">
-			 <p>this is where the facebook data will go</p>
+			 <p>{{fourSquareVisits}}</p>
 		   </div>
 		   <div class="liftdata">
 			 <p>{{lifts}}</p>

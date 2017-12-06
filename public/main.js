@@ -1,31 +1,7 @@
 var myRouter = new VueRouter({
 	data: {
-		// temp:0,
-		// precip:0,
-		// visi:0,
-		// wind:0,
-		// userinput:'',
-		// skiareas: {
-		// 	breckenridge:{lat:39.480724,lng:-106.066238},
-		// 	keystone: {lat:39.605011, lng:-105.953438}
-		// }
     },
 	methods: {
-			// request: function (response) {
-			//
-			// 	$.get('/getdata', (dataFromServer) => {
-			// 		// console.log(dataFromServer)
-			// 		this.temp = dataFromServer.currently.apparentTemperature
-			// 		this.precip = dataFromServer.currently.precipProbability
-			// 		this.visi = dataFromServer.currently.visibility
-			// 		this.wind = dataFromServer.currently.windSpeed
-			// 	//   this.temp = response
-			// 	})
-			// 	$.get('getLiftData', (liftdata) => {
-			// 		console.log(liftdata)
-			// 	})
-			// 	this.userinput = ($('#locationTextField').val())
-			// }
 	},
     routes: [
 		{
@@ -72,6 +48,8 @@ var myRouter = new VueRouter({
 							snowdepth:null,
 							facebook:null,
 							day:'',
+							snowfall:0,
+							fourSquareVisits:null,
 						}
 					},
 					created: function(){
@@ -106,6 +84,11 @@ var myRouter = new VueRouter({
 							// console.log(this.day)
 							this.summary = fullData.forecast.summary
 							this.lifts = "There are " + fullData.lifts.open + " lifts open and  " + fullData.lifts.closed +" closed"
+							//snowfall
+							this.snowfall = fullData.snowfall
+							//foursquare visit counter
+							this.fourSquareVisits = fullData.fourSquareVisits
+							console.log(this.fourSquareVisits)
 						})
 					},
 					destroyed: function(){ console.log('destroyed the ski area component')}

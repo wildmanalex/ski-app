@@ -1,21 +1,29 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
+const cheerio = require('cheerio')
 const app = express()
 const moment = require('moment')
+const secrets = require('./secrets.js')
 
 app.use(express.static('./public'))
 app.use(express.static('./'))
 
-app.get('/', function(req, res) {
-
-res.sendFile('./public//index.html', {root:'./'})
+app.get('/', function(req, res){
+	res.sendFile('./public//index.html', {root:'./'})
 })
 
 // where the calls start
 app.get('/getdata', function(req, res){
-	var darksky = `https://api.darksky.net/forecast/aac5cc16d61365dd24ade4fc5dcd3681/39.4817,-106.0384`;
-	var liftie = `https://liftie.info/api/resort/keystone`;
+	var darksky = `https://api.darksky.net/forecast/${secrets.dks}/39.4817,-106.0384`;
+	var liftie = `https://liftie.info/api/resort/vail`;
+	// var facebook = 'https://graph.facebook.com/v2.9/105551316143942/insights/page_places_checkin_total&access_token=193618711200710|6e3f49b536d12f9e19ebc590cc47cbd1'
+    // var facebook = `https://graph.facebook.com/v2.9/105551316143942/insights/page_places_checkin_total_unique?access_token=EAACEdEose0cBANxPlLxo6YC3ZCg0vDl9RdWjIBJXbsOZAZBMLXMR6vsIRr8FN9gMfLrMPFmuiNZAJr3S6TxoxvtVB6tQmwt1pEoW0d7G8tSQPsXhCOujTQ2IeZBDcnUe5oaQjlxo8YmInUKTIUJZAZCcLRoxwniaFOhdHasnEp6mkxWHcPTEtHDAntVDZBNwgukZD`
+	// var facebook = `https://graph.facebook.com/v2.11/search?type=place&center=39.1911,106.8175&distance=1&fields=name,checkins&date_preset=last_14d,location&access_token=193618711200710|6e3f49b536d12f9e19ebc590cc47cbd1`
+	// search?type=place&center=39.7392,104.9903&distance=3000&date_preset=yesterday&fields=name,checkins
+	// var foursquare =`https://api.foursquare.com/v2/venues/timeseries?49da5cd2f964a5207b5e1fe3&1512410153000&1512496553000&totalCheckins&client_id=J0XJEGV1NLXEYXVMHGYUDFRKIPQP2SR4YYQPDJMTNMCLCSFH&client_secret=2CPHNEM0ATCF5S1DMGEHKF4Y5H2KGOXUSITVM313XAPY0ECH&v=20171205`
+	var foursquare = `https://api.foursquare.com/v2/venues/49da5cd2f964a5207b5e1fe3?client_id=J0XJEGV1NLXEYXVMHGYUDFRKIPQP2SR4YYQPDJMTNMCLCSFH&client_secret=${secrets.fsq}&v=20171205`
+	var aeris = `http://api.aerisapi.com/observations/pierre,sd?client_id=FRlIH3nHPfrwY1qU9cc73&client_secret=yQor3D1ZdsLKqmJYcjGD9MYQnz9tao6XnL1Jc75U`;
 	var fullData = {
 		forecast: {
 			firstDay:{
@@ -49,8 +57,11 @@ app.get('/getdata', function(req, res){
 				highTemp:'',
 			},
 		},
+		snowfall:0,
 		lifts: '',
+		fourSquareVisits:0,
 	};
+	//DarkSky Request
 	request(darksky, function(err, response, darkskydata){
 		var cleanDarkSkyData = JSON.parse(darkskydata);
 		//firstDay
@@ -78,30 +89,49 @@ app.get('/getdata', function(req, res){
 		fullData.forecast.fifthDay.icon = cleanDarkSkyData.daily.data[4].icon;
 		fullData.forecast.fifthDay.lowTemp = cleanDarkSkyData.daily.data[4].temperatureLow;
 		fullData.forecast.fifthDay.highTemp = cleanDarkSkyData.daily.data[4].temperatureHigh;
-		// console.log(fullData.forecast.day, 'look here');
+		fullData.snowfall = cleanDarkSkyData.daily.data[0].precipAccumulation
 		console.log('Dark Sky Api call worked');
+		//lift request
 		request(liftie, function(err, response, liftieData){
 			var cleanLiftieData = JSON.parse(liftieData);
-			// console.log(cleanLiftieData)
-			// res.send(cleanLiftieData)
 			fullData.lifts = cleanLiftieData.lifts.stats;
 			console.log('Liftie api call worked');
-			console.log(fullData)
-			res.send(fullData)
+			// console.log(fullData)
+			// request(aeris, function(err, response, aerisData){
+			// 	var cleanAerisData = JSON.parse(aerisData);
+			// 	console.log('Aeris api call worked')
+			// 	// console.log(cleanAerisData)
+			// 	console.log(cleanAerisData.response.ob.snowDepthIN)
+				// console.log(cleanAerisData.response.ob.snowDepthIN)
+
+			// request('https://www.google.com/search?rlz=1C5CHFA_enUS750US750&ei=Nt8lWpmkFczjjwT4t6D4BQ&q=breckenridge+ski+resort&oq=breckenridge+ski+resort', function(err, response, html){
+				// var $ = cheerio.load(html)
+				// console.log($('a'))
+				// console.log(html)
+				// console.log($('table ._tS'))
+				// var document = html
+				// var test = document.querySelectorAll('table ._tS')[0].innerHTML
+				// console.log(test)
+			//FACEBOOK request
+			// request(facebook, function(err, response, facebookData){
+			// 	// console.log(facebookData)
+			// 	var cleanFBData = JSON.parse(facebookData)
+			// 	console.log(cleanFBData)
+			//foursquare request
+			request(foursquare, function(err, response, fourSquareData){
+				var cleanFourSquareData = JSON.parse(fourSquareData);
+				fullData.fourSquareVisits = cleanFourSquareData.response.venue.stats.visitsCount;
+				console.log(fullData.fourSquareVisits)
+				// console.log(fourSquareData)
+				res.send(fullData)
+			})
 		})
 	})
 })
 
 
-// app.get('/getLiftData', function(req, res){
-// 	// var liftie = `https://liftie.info/api/resort/breckenridge`
-// 	request(liftie, function(err, response, liftdata){
-// 		var cleanData = JSON.parse(liftdata)
-// 		// console.log(cleanData)
-// 		res.send(cleanData)
-// 	})
-// })
-//listen
+
+
 app.listen(8083, function(){
     console.log('server listening on port 8083')
 })
