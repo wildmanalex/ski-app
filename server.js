@@ -6,10 +6,130 @@ const app = express()
 const moment = require('moment')
 const secrets = require('./secrets.js')
 const mongoose = require('mongoose')
+const bcrypt = require('bcryptjs')
 
+//cookies from mozilla... chocolate chip cookies
+var sessionsModule = require('client-sessions')
 //connect to mongoose
 mongoose.connect('mongodb://localhost:27017/peakchoice')
 
+var sessionsMiddleware = sessionsModule({
+    // we call the sessionsModule, passing in an object defining how the sessions middleware should work.
+    // the sessionsModule then returns the sessionsMiddleware function
+    cookieName: 'in-class-auth-demo-cookie',
+    // in a later lecture, we will learn how to NOT put secrets directly in our source code
+    secret: 'peakchoice8080',
+    requestKey: 'session',
+    duration: 86400 * 1000 * 7, // one week in milliseconds
+    cookie: {
+        httpOnly: true,
+        secure: false, // use `secure:true` if you're deployed using HTTPS
+    }
+})
+app.use(sessionsMiddleware)
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}))
+
+//this is where the user login is defined
+var UserSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+    created: {
+        type: Date,
+        default: function(){ return new Date()}
+    }
+})
+var User = mongoose.model('User', UserSchema)
+
+app.use(express.static('./public'))
+app.use(express.static('./'))
+
+var checkIfLoggedIn = function(req, res, next){
+    if ( req.session._id ) {
+        console.log("user is logged in. proceeding to next route handler")
+        next()
+    }
+    else {
+        res.redirect('/register')
+    }
+}
+
+app.get('/', function(req, res){
+	res.sendFile('./public/index.html', {root:'./'})
+})
+app.get('/register', function(req, res){
+    res.sendFile('./public/html/register.html', {root: './'})
+})
+//-----Register logic------//
+app.post('/register', function(req, res){
+    console.log('request body? ', req.body)
+
+    var newUser = new User(req.body)
+    bcrypt.genSalt(11, function(saltErr, salt) {
+        if (saltErr) { console.log(saltErr)}
+        console.log('salt? ', salt)
+        bcrypt.hash(newUser.password, salt, function(hashErr, hashedPassword){
+            if (hashErr) { console.log(hashErr) }
+            newUser.password = hashedPassword
+            newUser.save(function(err){
+                if (err) { console.log('failed to save user')}
+                else {
+                    req.session._id = newUser._id
+                    res.send({success:'success!'})
+                }
+            })
+
+        })
+    })
+
+})
+
+
+//------ Login Logic -------//
+app.post('/login', function(req, res){
+    User.findOne({username: req.body.username}, function(err, user){
+        if ( err ) {
+            console.log('failed to find user')
+            res.send({failure:'failure'})
+        }
+        else if ( !user ) {
+            res.send({failure:'failure'})
+        }
+        // this person is trying to log in as a user who DOES exist in our database,
+        // but do the passwords match?
+        else {
+            // bcrypt.compare will hash req.body.password using the salt in user.password, and then compares if the resulting hash matches user.password
+            bcrypt.compare(req.body.password, user.password, function(bcryptErr, matched){
+                if (bcryptErr) {
+                    console.log(bcryptErr)
+                    res.send({failure:'failure'})
+                }
+                else if ( !matched ) {
+                    console.log('passwords dont match')
+                    res.send({failure:'failure'})
+                }
+                else if ( matched ) {
+                    // the user's password hashed to an exact match of the hash stored in the database
+                    req.session._id = user._id
+                    res.send({success:'success'})
+                }
+            })
+        }
+
+    })
+})
+
+
+
+//This is where the ski area is defined
 let skiAreaSchema = new mongoose.Schema({
 	name: { type: String, required: true },
 	lat: Number,
@@ -19,22 +139,6 @@ let skiAreaSchema = new mongoose.Schema({
 });
 
 let skiAreaModel = mongoose.model('SkiArea', skiAreaSchema);
-
-
-app.use(express.static('./public'))
-app.use(express.static('./'))
-
-app.get('/', function(req, res){
-	res.sendFile('./public//index.html', {root:'./'})
-})
-//Authentication Start
-
-
-
-
-
-
-
 
 
 
