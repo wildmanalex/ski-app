@@ -41,9 +41,27 @@ var myRouter = new VueRouter({
 			}
 		},
 		{
+			path:'/search',
+			component: function(resolve, reject) {
+				$.get('/search.html', function(htmlFromServer){
+					var newComponent = {
+						template: htmlFromServer,
+						methods: {
+							// apiCalls: function(){
+							// 	$.get('/getdata')
+							// }
+						},
+						created: function(){ console.log('created the register page')},
+						destroyed: function(){ console.log('destroyed the register page')},
+					}
+					resolve(newComponent)
+				})
+			}
+		},
+		{
 		path: '/skiArea/:location',
 		component: function(resolve, reject) {
-			// console.log(this.wind)
+			console.log(location)
 			$.get('/skiarea.html', function(htmlFromServer){
 				var newComponent = {
 					template: htmlFromServer,
@@ -134,28 +152,7 @@ var myRouter = new VueRouter({
 		}
 	}
 	],
-	// methods: {
-	// 		show: function(){
-	//
-	// 		},
-	// 		request: function (response) {
-	//
-	// 		 	$.get('/getdata', (dataFromServer) => {
-	// 				// console.log(dataFromServer)
-	// 				this.temp = dataFromServer.currently.apparentTemperature
-	// 				this.precip = dataFromServer.currently.precipProbability
-	// 				this.visi = dataFromServer.currently.visibility
-	// 				this.wind = dataFromServer.currently.windSpeed
-	// 			//   this.temp = response
-	// 			})
-	// 			$.get('getLiftData', (liftdata) => {
-	// 				console.log(liftdata)
-	// 			})
-	// 			this.userinput = ($('#locationTextField').val())
-	// 	  	},
-	//
-	//
-	// }
+
 })
 
 var mainVm = new Vue({
@@ -167,43 +164,11 @@ var mainVm = new Vue({
 		visi:0,
 		wind:0,
 		userinput:'',
-		// skiareas: {
-		// 	breckenridge:{lat:39.480724,lng:-106.066238},
-		// 	keystone: {lat:39.605011, lng:-105.953438}
-		// },
-		// registerForm: {
-        //     username: '',
-        //     password: '',
-        // },
-		// loginForm: {
-        //     username: '',
-        //     password: '',
-        // },
     },
 	methods: {
-		// register : function() {
-		// 	console.log(this.registerForm.password)
-        //     // we don't actually refer to the event object inside of this function, so there's no need to name the event object
-        //     $.post('/register', this.registerForm, function(dataFromServer){
-        //         console.log(dataFromServer)
-        //     })
-        // },
-		// login : function() {
-        //     // we don't actually refer to the event object inside of this function, so there's no need to name the event object
-        //     $.post('/login', this.loginForm, function(dataFromServer){
-        //         console.log(dataFromServer)
-        //     })
-        // },
-
-
 		show: function(){
 
 		},
-		request: function (response) {
-
-		},
-
-
 	}
 })
 // how to organize the vue app, global variables, componentRestrictions

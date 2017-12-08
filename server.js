@@ -140,12 +140,18 @@ let skiAreaSchema = new mongoose.Schema({
 
 let skiAreaModel = mongoose.model('SkiArea', skiAreaSchema);
 
-
-
-
-
 // where the calls start
 app.get('/getdata', function(req, res){
+	skiAreaModel.find(
+		{},
+		function(err, area) {
+			if(err) {
+				res.send(500).send(err)
+				return console.log(err)
+			}
+			res.status(200).send(area)
+		}
+	)
 	var darksky = `https://api.darksky.net/forecast/${secrets.dks}/39.4817,-106.0384`;
 	var liftie = `https://liftie.info/api/resort/vail`;
 	// var facebook = 'https://graph.facebook.com/v2.9/105551316143942/insights/page_places_checkin_total&access_token=193618711200710|6e3f49b536d12f9e19ebc590cc47cbd1'
@@ -193,6 +199,7 @@ app.get('/getdata', function(req, res){
 		fourSquareVisits:0,
 	};
 	//DarkSky Request
+
 	request(darksky, function(err, response, darkskydata){
 		var cleanDarkSkyData = JSON.parse(darkskydata);
 		//firstDay

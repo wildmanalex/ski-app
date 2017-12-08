@@ -4,8 +4,10 @@
 	<script src="https://unpkg.com/vue"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+	<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script> -->
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css"> -->
+	<link rel='stylesheet' type="text/css" href="search.css">
+
 	<link rel='stylesheet' type="text/css" href="main.css">
 
 </head>
@@ -18,15 +20,15 @@
 		</div>
 		<div class="space">
 		</div>
-		<center>
+		<!-- <center>
 			{{userinput}}
    			<input id="locationTextField" type="text" size="50" onfocus="this.value=''" v-model='userinput'>
 
 			<button type="button" class="btn btn-primary" v-on:click="request" >Get Current Weather</button>
 			<p>
 
-			</p>
-		</center>
+			</p> -->
+		<!-- </center> -->
 
 		<!-- <button v-on:click="request">data</button> -->
 		<!-- <div class="row">
@@ -87,7 +89,7 @@
 
   			</div>
 		</div> -->
-		<select class="selectpicker" data-size="5" title="Choose a Ski Area">
+		<!-- <select class="selectpicker" data-size="5" title="Choose a Ski Area">
 			<option value=""><a class="dropdown-item" href="#" ><router-link to="/skiArea/breck" v-on:click="request">Breckenridge</router-link></a></option>
 			<option>Arapahoe Basin</option>
 			<option>Steamboat Spring</option>
@@ -107,36 +109,21 @@
 			<option>Wolf Creek</option>
 			<option>Purgatory</option>
 			<option>Telluride</option>
-		</select>
-
+		</select> -->
+		<a><router-link to='/search'>dsadsadas</router-link></a>
 		<a><router-link to="/">Register</router-link></a>
-			<!-- <h2>Register</h2>
-			<form v-on:submit="register">
-                <input placeholder="username" v-model="registerForm.username">
-                <input placeholder="password" type="password" v-model="registerForm.password">
-                <input type="submit">
-            </form>
-			<h2>Log In</h2>
-            <form v-on:submit.prevent="login">
-                <input placeholder="username" v-model="loginForm.username">
-                <input placeholder="password" type="password" v-model="loginForm.password">
-                <input type="submit">
-            </form> -->
-		<!-- <input placeholder="username">
-		<input placeholder="password" type="password"> -->
-		<!-- <button>submit</button> -->
 		<router-view></router-view>
 
 	</div>
 
-        <script>
+        <!-- <script>
             function init() {
                 var input = document.getElementById('locationTextField');
                 var autocomplete = new google.maps.places.Autocomplete(input);
             }
             google.maps.event.addDomListener(window, 'load', init);
-        </script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+        </script> -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
