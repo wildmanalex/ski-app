@@ -5,6 +5,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 	<link rel='stylesheet' type="text/css" href="main.css">
 
 </head>
@@ -56,7 +57,7 @@
 		</div> -->
 
 
-		<div class="btn-group">
+		<!-- <div class="btn-group">
   			<button class="btn btn-secondary btn-lg" type="button">
     			Large button
   			</button>
@@ -65,10 +66,51 @@
   			</button>
   			<div class="dropdown-menu">
 				<a class="dropdown-item" href="#" ><router-link to="/skiArea/breck" v-on:click="request">breck</router-link></a>
-  			</div>
-		</div>
+				<a>Arapahoe Basin</a>
+				<a>Steamboat Spring</a>
+				<a>Keystone</a>
+				<a>Winter Park</a>
+				<a>Aspen Highlands</a>
+				<a>Aspen Mountain</a>
+				<a>Eldora</a>
+				<a>Loveland</a>
+				<a>Snowmass</a>
+				<a>Copper Mountain</a>
+				<a>Beaver Creek</a>
+				<a>Monarch</a>
+				<a>Crested Butte</a>
+				<a>Vail</a>
+				<a>Howelsen Hill</a>
+				<a>Wolf Creek</a>
+				<a>Purgatory</a>
+				<a>Telluride</a>
 
-			<h2>Register</h2>
+  			</div>
+		</div> -->
+		<select class="selectpicker" data-size="5" title="Choose a Ski Area">
+			<option value=""><a class="dropdown-item" href="#" ><router-link to="/skiArea/breck" v-on:click="request">Breckenridge</router-link></a></option>
+			<option>Arapahoe Basin</option>
+			<option>Steamboat Spring</option>
+			<option>Keystone</option>
+			<option>Winter Park</option>
+			<option>Aspen Highlands</option>
+			<option>Aspen Mountain</option>
+			<option>Eldora</option>
+			<option>Loveland</option>
+			<option>Snowmass</option>
+			<option>Copper Mountain</option>
+			<option>Beaver Creek</option>
+			<option>Monarch</option>
+			<option>Crested Butte</option>
+			<option>Vail</option>
+			<option>Howelsen Hill</option>
+			<option>Wolf Creek</option>
+			<option>Purgatory</option>
+			<option>Telluride</option>
+		</select>
+
+		<a><router-link to="/">Register</router-link></a>
+			<!-- <h2>Register</h2>
 			<form v-on:submit="register">
                 <input placeholder="username" v-model="registerForm.username">
                 <input placeholder="password" type="password" v-model="registerForm.password">
@@ -79,7 +121,7 @@
                 <input placeholder="username" v-model="loginForm.username">
                 <input placeholder="password" type="password" v-model="loginForm.password">
                 <input type="submit">
-            </form>
+            </form> -->
 		<!-- <input placeholder="username">
 		<input placeholder="password" type="password"> -->
 		<!-- <button>submit</button> -->
@@ -94,7 +136,7 @@
             }
             google.maps.event.addDomListener(window, 'load', init);
         </script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
