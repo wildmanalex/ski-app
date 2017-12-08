@@ -5,23 +5,23 @@
 		   <div class='forcast'>
 			 <p>Forecast</p>
 				<ul>
-				  <li>{{firstDay.day}}{{firstDay.icon}}{{firstDay.lowTemp}}{{firstDay.highTemp}}</li>
-				  <li>{{secondDay.day}}{{secondDay.icon}}{{secondDay.lowTemp}}{{secondDay.highTemp}}</li>
-				  <li>{{thirdDay.day}}{{thirdDay.icon}}{{thirdDay.lowTemp}}{{thirdDay.highTemp}}</li>
-				  <li>{{fourthDay.day}}{{fourthDay.icon}}{{fourthDay.lowTemp}}{{fourthDay.highTemp}}</li>
-				  <li>{{fifthDay.day}}{{fifthDay.icon}}{{fifthDay.lowTemp}}{{fifthDay.highTemp}}</li>
+				  <li>{{this.$parent.firstDay.day}}{{this.$parent.firstDay.icon}}{{this.$parent.firstDay.lowTemp}}{{this.$parent.firstDay.highTemp}}</li>
+				  <li>{{this.$parent.secondDay.day}}{{this.$parent.secondDay.icon}}{{this.$parent.secondDay.lowTemp}}{{this.$parent.secondDay.highTemp}}</li>
+				  <li>{{this.$parent.thirdDay.day}}{{this.$parent.thirdDay.icon}}{{this.$parent.thirdDay.lowTemp}}{{this.$parent.thirdDay.highTemp}}</li>
+				  <li>{{this.$parent.fourthDay.day}}{{this.$parent.fourthDay.icon}}{{this.$parent.fourthDay.lowTemp}}{{this.$parent.fourthDay.highTemp}}</li>
+				  <li>{{this.$parent.fifthDay.day}}{{this.$parent.fifthDay.icon}}{{this.$parent.fifthDay.lowTemp}}{{this.$parent.fifthDay.highTemp}}</li>
 				 </ul>
 		   </div>
 		   <div class='snow'>
-			 <p>There has been {{snowfall}} centimeters of snow in the last 24 hours</p>
+			 <p>There has been {{this.$parent.snowfall}} centimeters of snow in the last 24 hours</p>
 		   </div>
 		 </div>
 		 <div class="fbLiftData">
 		   <div class="facebook">
-			 <p>{{fourSquareVisits}}</p>
+			 <p>{{this.$parent.fourSquareVisits}}</p>
 		   </div>
 		   <div class="liftdata">
-			 <p>{{lifts}}</p>
+			 <p>{{this.$parent.lifts}}</p>
 		   </div>
 		</div>
 	  </div>

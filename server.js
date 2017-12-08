@@ -140,10 +140,24 @@ let skiAreaSchema = new mongoose.Schema({
 
 let skiAreaModel = mongoose.model('SkiArea', skiAreaSchema);
 
+
+app.get('/getsSkiAreas', function(req, res) {
+	skiAreaModel.find(
+		{},
+		function(err, allskiareas) {
+			if(err) {
+				res.status(500).send(err)
+				return console.log(err)
+			}
+			console.log(allskiareas)
+			res.status(200).send(allskiareas)
+		}
+	)
+})
 // where the calls start
 app.get('/getdata', function(req, res){
 	skiAreaModel.find(
-		{},
+		{_id:req.query},
 		function(err, area) {
 			if(err) {
 				res.send(500).send(err)

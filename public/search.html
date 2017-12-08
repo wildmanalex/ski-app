@@ -1,8 +1,9 @@
 <div>
 
-<select class="selectpicker" data-size="5" title="Choose a Ski Area">
-	<option><router-link to="/skiArea/breck"></router-link><a>Breckenridge</a></router-link></option>
-	<option>Arapahoe Basin</option>
+<select class="selectpicker" data-size="5" title="Choose a Ski Area" v-on:>
+	<!-- <option><router-link to="/skiArea/breck"></router-link><a>Breckenridge</a></router-link></option> -->
+	<option v-for="area in listofskiareas"></option>
+	<!-- <option>Arapahoe Basin</option>
 	<option>Steamboat Spring</option>
 	<option>Keystone</option>
 	<option>Winter Park</option>
@@ -19,7 +20,8 @@
 	<option>Howelsen Hill</option>
 	<option>Wolf Creek</option>
 	<option>Purgatory</option>
-	<option>Telluride</option>
+	<option>Telluride</option> -->
 </select>
 <a class="dropdown-item" href="#" ><router-link to="/skiArea/breck" >Breckenridge</router-link></a>
+<a v-on:click="this.$parent.apiCalls"><router-link to='/skiArea/breck'>test</router-link></a>
 </div>
