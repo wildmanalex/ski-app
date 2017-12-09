@@ -1,9 +1,14 @@
 <div>
 
-<select class="selectpicker" data-size="5" title="Choose a Ski Area" v-on:>
+<select class="selectpicker" data-size="5" title="Choose a Ski Area">
 	<!-- <option><router-link to="/skiArea/breck"></router-link><a>Breckenridge</a></router-link></option> -->
-	<option v-for="area in listofskiareas"></option>
+	<option v-for="area in skiAreaNames">{{area}}</option>
+	<p>
+		{{this.$children.test}}
+	</p>
+	<!-- {{this.$children.areas}} -->
 	<!-- <option>Arapahoe Basin</option>
+
 	<option>Steamboat Spring</option>
 	<option>Keystone</option>
 	<option>Winter Park</option>

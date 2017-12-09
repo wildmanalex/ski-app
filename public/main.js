@@ -8,6 +8,7 @@ var myRouter = new VueRouter({
 						template: htmlFromServer,
 						data: function(){
 							return {
+								test:'fdsfdsfdsfdsfs',
 								registerForm: {
 						            username: '',
 						            password: '',
@@ -50,13 +51,22 @@ var myRouter = new VueRouter({
 
 							return {
 								listofskiareas: [],
+								skiAreaNames:[],
 							}
-						}
+						},
+
 						created: function() {
-							$.get('/getsSkiAreas', (listofskiareas) => {
-								console.log(listofskiareas)
+							$.get('/getsSkiAreas', (skiAreasFromServer) => {
+								// console.log(listofskiareas)
 								console.log('created the register page')
-								this.listofskiareas = listofskiareas
+								// listofskiareas = skiAreasFromServer
+								for(var i = 0; i < skiAreasFromServer.length; i++){
+									var skiAreaNamesTemp = [];
+									skiAreaNamesTemp += skiAreasFromServer[i].name;
+									this.skiAreaNames.name = skiAreaNamesTemp
+									console.log(this.skiAreaNames)
+								}
+								// console.log(skiAreaNames)
 							})
 						},
 						destroyed: function(){console.log('destroyed the register page')},
