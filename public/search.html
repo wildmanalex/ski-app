@@ -1,11 +1,40 @@
 <div>
-
-<select class="selectpicker" data-size="5" title="Choose a Ski Area">
-	<!-- <option><router-link to="/skiArea/breck"></router-link><a>Breckenridge</a></router-link></option> -->
-	<option v-for="area in skiAreaNames">{{area}}</option>
-	<p>
-		{{this.$children.test}}
+	<!-- <p>
+		{{test}}
+		{{this.$parent.testforchild}}
 	</p>
+	<p v-on:click='test2'>
+		click me
+	</p> -->
+	<!-- <p>
+		{{this.$parent.skiAreaNames}}
+	</p> -->
+	<div class="btn-group">
+		<button type="button" class="btn btn-primary">Action</button>
+		<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<span class="sr-only">Toggle Dropdown</span>
+		</button>
+		<div class="dropdown-menu">
+			<!-- <a v-for="area in this.skiAreaNames">{{area.name}}></a> -->
+			<router-link to="/skiArea/breck">Breck</router-link>
+			<router-link to="/skiArea/abasin">abasin</router-link>
+			<router-link to="/skiArea/monarch">monarch</router-link>
+
+		 	<!-- <a v-on:click="this.$parent.apiCalls('[breck,49da5cd2f964a5207b5e1fe3,39.4817,106.0384]',$event)"><router-link to="/skiArea/breck">Breck</router-link></a> -->
+			<!-- <a><router-link to="/skiArea/abasin">abasin</router-link></a> -->
+
+		</div>
+	</div>
+
+<!-- <select class="selectpicker" data-size="5" title="Choose a Ski Area"> -->
+	<!-- <option v-for="area in this.$parent.skiAreaNames">{{area}}</option> -->
+	<!-- <option><router-link to="/skiArea/breck">Breckenridge</router-link></option>
+	<option><router-link to="/skiArea/abasin"></router-link><a>Arapahoe Basin</a></router-link></option>
+	<option><router-link to="/skiArea/breck"></router-link><a>Steamboat Springs</a></router-link></option>
+	<option><router-link to="/skiArea/breck"></router-link><a>Steamboat Springs</a></router-link></option>
+	<router-link to="/skiArea/breck">breck</router-link> -->
+
+
 	<!-- {{this.$children.areas}} -->
 	<!-- <option>Arapahoe Basin</option>
 
@@ -26,7 +55,8 @@
 	<option>Wolf Creek</option>
 	<option>Purgatory</option>
 	<option>Telluride</option> -->
-</select>
-<a class="dropdown-item" href="#" ><router-link to="/skiArea/breck" >Breckenridge</router-link></a>
-<a v-on:click="this.$parent.apiCalls"><router-link to='/skiArea/breck'>test</router-link></a>
+<!-- </select> -->
+<!-- <router-link to="/skiArea/breck"></router-link><a>Breckenridge</a></router-link>
+ <a class="dropdown-item" href="#" ><router-link to="/skiArea/breck" >Breckenridge</router-link></a>
+<a v-on:click="this.$parent.apiCalls"><router-link to='/skiArea/breck'>test</router-link></a> -->
 </div>

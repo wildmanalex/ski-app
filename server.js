@@ -149,31 +149,32 @@ app.get('/getsSkiAreas', function(req, res) {
 				res.status(500).send(err)
 				return console.log(err)
 			}
-			console.log(allskiareas)
+			// console.log(allskiareas)
 			res.status(200).send(allskiareas)
 		}
 	)
 })
 // where the calls start
 app.get('/getdata', function(req, res){
+	console.log(req.query.lat)
 	skiAreaModel.find(
 		{_id:req.query},
 		function(err, area) {
 			if(err) {
-				res.send(500).send(err)
+				// res.sendSt(500).send(err)
 				return console.log(err)
 			}
 			res.status(200).send(area)
 		}
 	)
-	var darksky = `https://api.darksky.net/forecast/${secrets.dks}/39.4817,-106.0384`;
-	var liftie = `https://liftie.info/api/resort/vail`;
+	var darksky = `https://api.darksky.net/forecast/${secrets.dks}/${req.query.lat},${req.query.lng}`;
+	var liftie = `https://liftie.info/api/resort/${req.query.liftieName}`;
 	// var facebook = 'https://graph.facebook.com/v2.9/105551316143942/insights/page_places_checkin_total&access_token=193618711200710|6e3f49b536d12f9e19ebc590cc47cbd1'
     // var facebook = `https://graph.facebook.com/v2.9/105551316143942/insights/page_places_checkin_total_unique?access_token=EAACEdEose0cBANxPlLxo6YC3ZCg0vDl9RdWjIBJXbsOZAZBMLXMR6vsIRr8FN9gMfLrMPFmuiNZAJr3S6TxoxvtVB6tQmwt1pEoW0d7G8tSQPsXhCOujTQ2IeZBDcnUe5oaQjlxo8YmInUKTIUJZAZCcLRoxwniaFOhdHasnEp6mkxWHcPTEtHDAntVDZBNwgukZD`
 	// var facebook = `https://graph.facebook.com/v2.11/search?type=place&center=39.1911,106.8175&distance=1&fields=name,checkins&date_preset=last_14d,location&access_token=193618711200710|6e3f49b536d12f9e19ebc590cc47cbd1`
 	// search?type=place&center=39.7392,104.9903&distance=3000&date_preset=yesterday&fields=name,checkins
 	// var foursquare =`https://api.foursquare.com/v2/venues/timeseries?49da5cd2f964a5207b5e1fe3&1512410153000&1512496553000&totalCheckins&client_id=J0XJEGV1NLXEYXVMHGYUDFRKIPQP2SR4YYQPDJMTNMCLCSFH&client_secret=2CPHNEM0ATCF5S1DMGEHKF4Y5H2KGOXUSITVM313XAPY0ECH&v=20171205`
-	var foursquare = `https://api.foursquare.com/v2/venues/4b3397c5f964a5202f1b25e3?client_id=J0XJEGV1NLXEYXVMHGYUDFRKIPQP2SR4YYQPDJMTNMCLCSFH&client_secret=${secrets.fsq}&v=20171205`
+	var foursquare = `https://api.foursquare.com/v2/venues/${req.query.fsid}?client_id=J0XJEGV1NLXEYXVMHGYUDFRKIPQP2SR4YYQPDJMTNMCLCSFH&client_secret=${secrets.fsq}&v=20171205`
 	// var aeris = `http://api.aerisapi.com/observations/pierre,sd?client_id=FRlIH3nHPfrwY1qU9cc73&client_secret=yQor3D1ZdsLKqmJYcjGD9MYQnz9tao6XnL1Jc75U`;
 	var fullData = {
 		forecast: {
@@ -273,8 +274,8 @@ app.get('/getdata', function(req, res){
 			request(foursquare, function(err, response, fourSquareData){
 				var cleanFourSquareData = JSON.parse(fourSquareData);
 				fullData.fourSquareVisits = cleanFourSquareData.response.venue.stats.visitsCount;
-				console.log(cleanFourSquareData.response.venue)
-				console.log(fullData.fourSquareVisits)
+				// console.log(cleanFourSquareData.response.venue)
+				// console.log(fullData.fourSquareVisits)
 				// console.log(fourSquareData)
 				res.send(fullData)
 			})
