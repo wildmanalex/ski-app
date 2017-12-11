@@ -1,23 +1,68 @@
+/*******  Register Component ********/
+.registerComponent {
+	width: 100vw;
+	text-align: center;
+	/*background-color: #A5D6FC;*/
+	background-image: url('login-img.jpeg');
+	/* Full height */
+	height: 100vh;
+	/* Create the parallax scrolling effect */
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+}
+.container-fluid {
+}
+.box {
+	display: inline-flex;
+	flex-direction: column;
+	position: absolute;
+	top:2rem;
+	left:0;
+	right:0;
+	height: 55vh;
+	width: 30vw;
+	background-color: black;
+	background: rgba(0,0,0,0.7);
+}
+.login {
+	order: 1;
+	flex-grow: 1;
+}
+.register {
+	order:2;
+	flex-grow: 3;
+}
+h2 {
+	color: white;
+}
+/*******  End Register Component ********/
+/*
 .space {
 	height: 2rem;
 }
 .header {
 	height: 25vh;
-	width: auto;
+	width: auto;*/
 	/*background-image:url('https://static.pexels.com/photos/416714/pexels-photo-416714.jpeg');*/
-	background-repeat: no-repeat;
+	/*background-repeat: no-repeat;
 	background-position: center center;
 	background-attachment: fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
-}
-/****   ski area dropdown  ****/
+}*/
+/******* Search Component *****/
 .dropdown-menu {
 	width: auto;
 	height: 20vh;
 }
+/******* End Search Component *****/
+
+/****** Report Component ******/
 .areaContainer {
   border:1px solid black;
   height:30rem;
@@ -51,3 +96,4 @@
 .snow {
   width:50%;
 }
+/****** End Report Component ******/

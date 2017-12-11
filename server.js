@@ -55,6 +55,7 @@ app.use(express.static('./'))
 var checkIfLoggedIn = function(req, res, next){
     if ( req.session._id ) {
         console.log("user is logged in. proceeding to next route handler")
+		// res.sendFile('./public/search.html', {root:'./'})
         next()
     }
     else {
@@ -66,7 +67,7 @@ app.get('/', function(req, res){
 	res.sendFile('./public/index.html', {root:'./'})
 })
 app.get('/register', function(req, res){
-    res.sendFile('./public/html/register.html', {root: './'})
+    res.sendFile('./public/register.html', {root: './'})
 })
 //-----Register logic------//
 app.post('/register', function(req, res){
@@ -126,7 +127,9 @@ app.post('/login', function(req, res){
 
     })
 })
-
+app.get('/search', checkIfLoggedIn, function(req, res){
+    res.sendFile('./public/search.html', {root:'./'})
+})
 
 
 //This is where the ski area is defined

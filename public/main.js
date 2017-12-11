@@ -16,6 +16,7 @@ var myRouter = new VueRouter({
 						            username: '',
 						            password: '',
 						        },
+								clicked: false,
 							}
 						},
 						methods: {
@@ -28,7 +29,11 @@ var myRouter = new VueRouter({
 							},
 							login : function() {
 								// we don't actually refer to the event object inside of this function, so there's no need to name the event object
-								$.post('/login', this.loginForm, function(dataFromServer){
+								$.post('/login', this.loginForm, (dataFromServer)=>	{
+									if(dataFromServer.success) {
+										// this.router.push('/search')
+										this.$router.push({ path: `/search` })
+									}
 									console.log(dataFromServer)
 								})
 							},
@@ -158,8 +163,7 @@ var myRouter = new VueRouter({
 									var b = this.listofskiareas[i].lng;
 									var c = this.listofskiareas[i].liftieName;
 									var d = this.listofskiareas[i].fourSquareID;
-									$.get('/getdata', {lat: a, lng: b, liftieName: c, fsid: d}, (fullData) =>{
-
+									$.get('/getdata', {lat: a, lng: b, liftieName: c, fsid: d}, (fullData) => {
 										console.log(fullData)
 										console.log('this workeddddd')
 										this.day = new Date(fullData.day)
