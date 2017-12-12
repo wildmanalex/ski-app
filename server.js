@@ -71,7 +71,7 @@ app.get('/register', function(req, res){
 })
 //-----Register logic------//
 app.post('/register', function(req, res){
-    console.log('request body? ', req.body)
+    // console.log('request body? ', req.body)
 
     var newUser = new User(req.body)
     bcrypt.genSalt(11, function(saltErr, salt) {
@@ -159,7 +159,7 @@ app.get('/getsSkiAreas', function(req, res) {
 })
 // where the calls start
 app.get('/getdata', function(req, res){
-	console.log(req.query.lat)
+	// console.log(req.query.lat)
 	skiAreaModel.find(
 		{_id:req.query},
 		function(err, area) {
@@ -170,6 +170,10 @@ app.get('/getdata', function(req, res){
 			res.status(200).send(area)
 		}
 	)
+	// if(req.query.liftieName === 'purgatory' || req.query.liftieName === 'wolfcreek' || req.query.liftieName === 'eldora' || req.query.liftieName === 'howelsen'){
+	// 	req.query.liftieName === 'alta';
+	// }
+	console.log(req.query.liftieName)
 	var darksky = `https://api.darksky.net/forecast/${secrets.dks}/${req.query.lat},${req.query.lng}`;
 	var liftie = `https://liftie.info/api/resort/${req.query.liftieName}`;
 	// var facebook = 'https://graph.facebook.com/v2.9/105551316143942/insights/page_places_checkin_total&access_token=193618711200710|6e3f49b536d12f9e19ebc590cc47cbd1'
@@ -214,6 +218,7 @@ app.get('/getdata', function(req, res){
 		},
 		snowfall:0,
 		lifts: '',
+		liftieName:'',
 		fourSquareVisits:0,
 	};
 	//DarkSky Request
@@ -245,11 +250,33 @@ app.get('/getdata', function(req, res){
 		fullData.forecast.fifthDay.icon = cleanDarkSkyData.daily.data[4].icon;
 		fullData.forecast.fifthDay.lowTemp = cleanDarkSkyData.daily.data[4].temperatureLow;
 		fullData.forecast.fifthDay.highTemp = cleanDarkSkyData.daily.data[4].temperatureHigh;
-		fullData.snowfall = cleanDarkSkyData.daily.data[0].precipAccumulation
+		// fullData.snowfall = cleanDarkSkyData.daily.data[1].precipAccumulation;
+		if (cleanDarkSkyData.daily.data[1].precipProbability === 0) {
+			fullData.snowfall = 0;
+		}
+		else{
+			fullData.snowfall = cleanDarkSkyData.daily.data[1].precipAccumulation
+		}
+		console.log(darkskydata);
+		// if(cleanDarkSkyData.daily.data[1].precipAccumulation === 'undefined'){
+		// 	cleanDarkSkyData.daily.data[1].precipAccumulation = 0;
+		// }
+		// if(cleanDarkSkyData.daily.data[2].precipAccumulation === 'undefined'){
+		// 	cleanDarkSkyData.daily.data[2].precipAccumulation = 0;
+		// }
+		// if(cleanDarkSkyData.daily.data[3].precipAccumulation === 'undefined'){
+		// 	cleanDarkSkyData.daily.data[3].precipAccumulation = 0;
+		// }
+		// fullData.snowfall = ((cleanDarkSkyData.daily.data[1].precipAccumulation) + (cleanDarkSkyData.daily.data[2].precipAccumulation) + (cleanDarkSkyData.daily.data[3].precipAccumulation))
+		// console.log((cleanDarkSkyData.daily.data[1].precipAccumulation) + (cleanDarkSkyData.daily.data[2].precipAccumulation) + (cleanDarkSkyData.daily.data[3].precipAccumulation))
+		// console.log(typeof (cleanDarkSkyData.daily.data[0].precipAccumulation))
+		// console.log(cleanDarkSkyData.daily.data[1].precipAccumulation)
+		// console.log(darkskydata)
 		console.log('Dark Sky Api call worked');
 		//lift request
 		request(liftie, function(err, response, liftieData){
 			var cleanLiftieData = JSON.parse(liftieData);
+			fullData.liftieName = cleanLiftieData.id
 			fullData.lifts = cleanLiftieData.lifts.stats;
 			console.log('Liftie api call worked');
 			// console.log(fullData)

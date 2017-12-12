@@ -21,6 +21,12 @@ db.on('error', console.error.bind(console, 'connection error:'));
 
 	var skiArea = mongoose.model('skiArea', skiAreaSchema);
 
+	purgatory.findById('5a297a8d41af309e2bee797d', function (err, doc){
+		if(err) {
+	 		console.log(err)
+	 	}
+
+});
 	var breck = new skiArea({
 		   "name" : "Breckenridge",
 		   "lat" : 39.4817,
@@ -272,5 +278,5 @@ db.on('error', console.error.bind(console, 'connection error:'));
 
 
 
-	// db.close();
-// })
+	db.close();
+})

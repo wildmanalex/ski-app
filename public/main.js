@@ -153,10 +153,25 @@ var myRouter = new VueRouter({
 					},
 					created: function(){
 						console.log('created the ski area component')
-						this.requestedLocation = this.$route.params.location;
+						if(this.$route.params.location === 'wolfcreek'){
+							this.requestedLocation = 'alta';
+						}
+						else if(this.$route.params.location === 'purgatory'){
+							this.requestedLocation = 'boreal';
+						}
+						else if(this.$route.params.location === 'howelsen'){
+							this.requestedLocation = 'brighton';
+						}
+						else if(this.$route.params.location === 'eldora'){
+							this.requestedLocation = 'cannon';
+						}
+						else {
+							this.requestedLocation = this.$route.params.location;
+						}
 						$.get('/getsSkiAreas', (skiAreasFromServer) => {
 							// console.log('created the register page')
 							this.listofskiareas = skiAreasFromServer;
+
 							for(var i = 0; i < this.listofskiareas.length; i++) {
 								if(this.requestedLocation === this.listofskiareas[i].liftieName){
 									var a = this.listofskiareas[i].lat;
@@ -164,6 +179,7 @@ var myRouter = new VueRouter({
 									var c = this.listofskiareas[i].liftieName;
 									var d = this.listofskiareas[i].fourSquareID;
 									$.get('/getdata', {lat: a, lng: b, liftieName: c, fsid: d}, (fullData) => {
+
 										console.log(fullData)
 										console.log('this workeddddd')
 										this.day = new Date(fullData.day)
@@ -193,8 +209,29 @@ var myRouter = new VueRouter({
 										this.fifthDay.highTemp = fullData.forecast.firstDay.highTemp
 										// console.log(this.day)
 										this.summary = fullData.forecast.summary
-										this.lifts = "There are " + fullData.lifts.open + " lifts open and  " + fullData.lifts.closed +" closed"
+										//lifitie data
+										if(fullData.liftieName === 'alta'){
+											this.lifts = "Lift data is unavailable for this ski area at the time";
+										}
+										else if(fullData.liftieName === 'boreal'){
+											this.lifts = "Lift data is unavailable for this ski area at the time";
+										}
+										else if(fullData.liftieName === 'brighton'){
+											this.lifts = "Lift data is unavailable for this ski area at the time";
+										}
+										else if(fullData.liftieName === 'cannon'){
+											this.lifts = "Lift data is unavailable for this ski area at the time";
+										}
+										else{
+										this.lifts = "There are " + fullData.lifts.open + " lifts open and  " + fullData.lifts.closed +" closed";
+										}
 										//snowfall
+										if(fullData.snowfall === 0){
+											console.log('SNOWFALL WAS ZERO')
+										}
+										else {
+											console.log('not zero')
+										}
 										this.snowfall = fullData.snowfall
 										//foursquare visit counter
 										this.fourSquareVisits = fullData.fourSquareVisits
