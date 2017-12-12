@@ -1,9 +1,15 @@
+/******* CSS used throughout App *******/
+* {
+	font-family: 'Roboto Slab', serif;
+
+}
+
 /*******  Register Component ********/
 .registerComponent {
 	width: 100vw;
-	text-align: center;
 	/*background-color: #A5D6FC;*/
 	background-image: url('login-img.jpeg');
+	/*background-image: url('test.jpeg');*/
 	/* Full height */
 	height: 100vh;
 	/* Create the parallax scrolling effect */
@@ -11,31 +17,53 @@
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	position: relative;
+	/*position: relative;*/
+	display: inline-flex;
+	justify-content: center;
 }
-.container-fluid {
+
+.title-box {
+	position: absolute;
+	width: max-content;
+	top:7.5rem;
+	/*text-shadow: white 0px 0px 10px;*/
+	/*background-color: #FDFDFD;*/
+	/*background: rgba(0,0,0,0.05);*/
+}
+.title {
+	color: white;
+	font-size: 8vw;
 }
 .box {
 	display: inline-flex;
-	flex-direction: column;
+	justify-content: center;
 	position: absolute;
-	top:2rem;
-	left:0;
-	right:0;
-	height: 55vh;
+	top:17rem;
+	/*height: 100vh;*/
+	width: 100vw;
+	/*flex-direction: column;
+	width: 30vw;
+	background-color: black;
+	background: rgba(0,0,0,0.7);*/
+}
+.loginBox {
+	flex-direction: column;
 	width: 30vw;
 	background-color: black;
 	background: rgba(0,0,0,0.7);
+	text-align: center;
 }
-.login {
-	order: 1;
-	flex-grow: 1;
+.btn-block {
+	background-color: grey;
+	border: none;
 }
-.register {
-	order:2;
-	flex-grow: 3;
+.form-control[type="text"] {
+	background-color: white;
 }
-h2 {
+.form-signin-heading {
+	color: white;
+}
+.checkbox {
 	color: white;
 }
 /*******  End Register Component ********/
@@ -56,9 +84,35 @@ h2 {
 	background-size: cover;
 }*/
 /******* Search Component *****/
-.dropdown-menu {
+.searchComponent {
+	display: inline-flex;
+	justify-content: center;
+	flex-direction: column;
+}
+.header {
+	height: 25vh;
+	width: 100%;
+	/*background-image:url('https://static.pexels.com/photos/416714/pexels-photo-416714.jpeg');*/
+	background-image:url('header.jpeg');
+	/*background-color: blue;*/
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 50%;
+	/*background-size: cover;*/
+	/*background-position: top;*/
+	/*background-position: center center;
+	background-attachment: fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;*/
+}
+.btn-group {
 	width: auto;
-	height: 20vh;
+}
+.dropdown-menu {
+	/*width: auto;
+	height: 20vh;*/
 }
 /******* End Search Component *****/
 

@@ -1,14 +1,8 @@
-<div>
-	<!-- <p>
-		{{test}}
-		{{this.$parent.testforchild}}
-	</p>
-	<p v-on:click='test2'>
-		click me
-	</p> -->
-	<!-- <p>
-		{{this.$parent.skiAreaNames}}
-	</p> -->
+<div class="container-fluid searchComponent">
+	<div class="header">
+		<!-- <img src="https://static.pexels.com/photos/416714/pexels-photo-416714.jpeg" class="img-fluid"> -->
+		<!-- <img src="https://static.pexels.com/photos/531636/pexels-photo-531636.jpeg" class="img-fluid"> -->
+	</div>
 	<div class="btn-group">
 		<button type="button" class="btn btn-primary">Choose A Ski Area</button>
 		<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -16,63 +10,25 @@
 		</button>
 		<div class="dropdown-menu">
 			<!-- <a v-for="area in this.skiAreaNames">{{area.name}}></a> -->
-			<router-link to="/skiArea/breck">Breck</router-link>
-			<router-link to="/skiArea/abasin">Arapahoe Basin</router-link>
-			<router-link to="/skiArea/monarch">Monarch</router-link>
-			<router-link to="/skiArea/steamboat">Steamboat Springs</router-link>
-			<router-link to="/skiArea/keystone">Keystone</router-link>
-			<router-link to="/skiArea/winter-park">Winter Park</router-link>
-			<router-link to="/skiArea/aspen-highlands">Aspen Highlands</router-link>
-			<router-link to="/skiArea/aspen-mountain">Aspen</router-link>
-			<router-link to="/skiArea/eldora">Eldora</router-link>
-			<router-link to="/skiArea/loveland">Loveland</router-link>
-			<router-link to="/skiArea/snowmass">Snowmass</router-link>
-			<router-link to="/skiArea/copper">Copper Mountain</router-link>
-			<router-link to="/skiArea/beavercreek">Beaver Creek</router-link>
-			<router-link to="/skiArea/crested-butte">Crested Butte</router-link>
-			<router-link to="/skiArea/vail">Vail</router-link>
-			<router-link to="/skiArea/howelsen">Howelsen Hill</router-link>
-			<router-link to="/skiArea/wolfcreek">Wolf Creek</router-link>
-			<router-link to="/skiArea/purgatory">Purgatory</router-link>
-			<router-link to="/skiArea/telluride">Telluride</router-link>
-
-		 	<!-- <a v-on:click="this.$parent.apiCalls('[breck,49da5cd2f964a5207b5e1fe3,39.4817,106.0384]',$event)"><router-link to="/skiArea/breck">Breck</router-link></a> -->
-			<!-- <a><router-link to="/skiArea/abasin">abasin</router-link></a> -->
-
+			<li><router-link to="/skiArea/breck">Breck</router-link></li>
+			<li><router-link to="/skiArea/abasin">Arapahoe Basin</router-link></li>
+			<li><router-link to="/skiArea/monarch">Monarch</router-link></li>
+			<li><router-link to="/skiArea/steamboat">Steamboat Springs</router-link></li>
+			<li><router-link to="/skiArea/keystone">Keystone</router-link></li>
+			<li><router-link to="/skiArea/winter-park">Winter Park</router-link></li>
+			<li><router-link to="/skiArea/aspen-highlands">Aspen Highlands</router-link></li>
+			<li><router-link to="/skiArea/aspen-mountain">Aspen</router-link></li>
+			<li><router-link to="/skiArea/eldora">Eldora</router-link></li>
+			<li><router-link to="/skiArea/loveland">Loveland</router-link></li>
+			<li><router-link to="/skiArea/snowmass">Snowmass</router-link></li>
+			<li><router-link to="/skiArea/copper">Copper Mountain</router-link></li>
+			<li><router-link to="/skiArea/beavercreek">Beaver Creek</router-link></li>
+			<li><router-link to="/skiArea/crested-butte">Crested Butte</router-link></li>
+			<li><router-link to="/skiArea/vail">Vail</router-link></li>
+			<li><router-link to="/skiArea/howelsen">Howelsen Hill</router-link></li>
+			<li><router-link to="/skiArea/wolfcreek">Wolf Creek</router-link></li>
+			<li><router-link to="/skiArea/purgatory">Purgatory</router-link></li>
+			<li><router-link to="/skiArea/telluride">Telluride</router-link></li>
 		</div>
 	</div>
-
-<!-- <select class="selectpicker" data-size="5" title="Choose a Ski Area"> -->
-	<!-- <option v-for="area in this.$parent.skiAreaNames">{{area}}</option> -->
-	<!-- <option><router-link to="/skiArea/breck">Breckenridge</router-link></option>
-	<option><router-link to="/skiArea/abasin"></router-link><a>Arapahoe Basin</a></router-link></option>
-	<option><router-link to="/skiArea/breck"></router-link><a>Steamboat Springs</a></router-link></option>
-	<option><router-link to="/skiArea/breck"></router-link><a>Steamboat Springs</a></router-link></option>
-	<router-link to="/skiArea/breck">breck</router-link> -->
-
-
-	<!-- {{this.$children.areas}} -->
-	<!-- <option>Arapahoe Basin</option>
-
-	<option>Steamboat Spring</option>
-	<option>Keystone</option>
-	<option>Winter Park</option>
-	<option>Aspen Highlands</option>
-	<option>Aspen Mountain</option>
-	<option>Eldora</option>
-	<option>Loveland</option>
-	<option>Snowmass</option>
-	<option>Copper Mountain</option>
-	<option>Beaver Creek</option>
-	<option>Monarch</option>
-	<option>Crested Butte</option>
-	<option>Vail</option>
-	<option>Howelsen Hill</option>
-	<option>Wolf Creek</option>
-	<option>Purgatory</option>
-	<option>Telluride</option> -->
-<!-- </select> -->
-<!-- <router-link to="/skiArea/breck"></router-link><a>Breckenridge</a></router-link>
- <a class="dropdown-item" href="#" ><router-link to="/skiArea/breck" >Breckenridge</router-link></a>
-<a v-on:click="this.$parent.apiCalls"><router-link to='/skiArea/breck'>test</router-link></a> -->
 </div>
