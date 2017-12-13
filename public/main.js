@@ -58,11 +58,16 @@ var myRouter = new VueRouter({
 						},
 						created: function(){
 							$.get('/getSavedAreas', (savedAreas) => {
-								console.log(savedAreas[0].savedAreas)
-								this.userSavedAreas = savedAreas[0].savedAreas
+								console.log(savedAreas)
+								for(var i = 0; i < savedAreas[0].savedAreas.length; i++) {
+										console.log(savedAreas[0].savedAreas[i].name)
+										this.userSavedAreas = savedAreas[0].savedAreas[i]
+								}
+								// this.userSavedAreas = savedAreas[0].savedAreas
 								console.log(this.userSavedAreas)
 							})
-							console.log('created the search page')},
+							console.log('created the search page')
+						},
 						destroyed: function(){console.log('destroyed the search page')},
 					}
 					resolve(newComponent)

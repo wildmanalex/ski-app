@@ -16,7 +16,9 @@
 	</div>
 </div>
 <p>
-	{{this.userSavedAreas}}
+	<!-- <router-link class="router" v-bind:to="/skiArea/userSavedAreas" >{{this.userSavedAreas}}</router-link> -->
+	<!-- {{this.userSavedAreas}} -->
+	<router-link v-for="link in this.userSavedAreas" v-bind:to="'/skiArea/'+link" :key='link'>{{link}}</router-link>
 </p>
 <div class='space'></div>
 	<!-- <div class="header">
