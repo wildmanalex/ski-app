@@ -51,46 +51,17 @@ var myRouter = new VueRouter({
 				$.get('/search.html', function(htmlFromServer) {
 					var newComponent = {
 						template: htmlFromServer,
-						// data: function(){
-						// 	return {
-						// 		test:'fdsfdsfdsfdsfs',
-						// 		listofskiareas: [],
-						// 		skiAreaNames:[],
-						// 	}
-						//
-						// },
-						// methods: {
-						// 	test2: function() {
-						// 		$.get('/getsSkiAreas', (skiAreasFromServer) => {
-						// 			// console.log(listofskiareas)
-						// 			console.log('created the register page')
-						// 			// listofskiareas = skiAreasFromServer
-						// 			for(var i = 0; i < skiAreasFromServer.length; i++){
-						// 				var skiAreaNamesTemp = [];
-						// 				skiAreaNamesTemp += skiAreasFromServer[i].name;
-						// 				this.skiAreaNames.name = skiAreaNamesTemp
-						// 				console.log(this.skiAreaNames)
-						// 			}
-						// 			// console.log(skiAreaNames)
-						// 		})
-						// 	},
-						// },
-						// created: function() {
-						// 	$.get('/getsSkiAreas', (skiAreasFromServer) => {
-						// 		// console.log(listofskiareas)
-						// 		console.log('created the register page')
-						// 		// listofskiareas = skiAreasFromServer
-						// 		for(var i = 0; i < skiAreasFromServer.length; i++){
-						// 			var skiAreaNamesTemp = [];
-						// 			skiAreaNamesTemp += skiAreasFromServer[i].name;
-						// 			this.skiAreaNames.name = skiAreaNamesTemp
-						// 			console.log(this.skiAreaNames)
-						// 		}
-						// 		// console.log(skiAreaNames)
-						// 	})
-						// },
+						data: function() {
+							return {
+								userSavedAreas:null,
+							}
+						},
 						created: function(){
-							this.$parent.testmethod()
+							$.get('/getSavedAreas', (savedAreas) => {
+								console.log(savedAreas[0].savedAreas)
+								this.userSavedAreas = savedAreas[0].savedAreas
+								console.log(this.userSavedAreas)
+							})
 							console.log('created the search page')},
 						destroyed: function(){console.log('destroyed the search page')},
 					}
@@ -151,7 +122,15 @@ var myRouter = new VueRouter({
 							day:'',
 							snowfall:0,
 							fourSquareVisits:null,
+							nameForReport:'',
 						}
+					},
+					methods: {
+						saveArea: function(event) {
+							$.post('/saveArea', {name: this.$route.params.location}, (data) =>{
+								this.savedAreas = data
+							})
+						},
 					},
 					created: function(){
 						console.log('created the ski area component')
@@ -166,6 +145,9 @@ var myRouter = new VueRouter({
 						}
 						else if(this.$route.params.location === 'eldora'){
 							this.requestedLocation = 'cannon';
+						}
+						else if(this.$route.params.location === 'breck'){
+							this.nameForReport === 'Breckenridge';
 						}
 						else {
 							this.requestedLocation = this.$route.params.location;
@@ -182,7 +164,7 @@ var myRouter = new VueRouter({
 									var d = this.listofskiareas[i].fourSquareID;
 									$.get('/getdata', {lat: a, lng: b, liftieName: c, fsid: d}, (fullData) => {
 
-										console.log(fullData)
+										// console.log(fullData)
 										console.log('this workeddddd')
 										this.day = new Date(fullData.day)
 										this.firstDay.day = (moment.unix(fullData.forecast.firstDay.day).format('dddd'));
@@ -191,24 +173,24 @@ var myRouter = new VueRouter({
 										this.firstDay.highTemp = fullData.forecast.firstDay.highTemp
 										//secondDay
 										this.secondDay.day = (moment.unix(fullData.forecast.secondDay.day).format('dddd'));
-										this.secondDay.icon = fullData.forecast.firstDay.icon
-										this.secondDay.lowTemp = fullData.forecast.firstDay.lowTemp
-										this.secondDay.highTemp = fullData.forecast.firstDay.highTemp
+										this.secondDay.icon = fullData.forecast.secondDay.icon
+										this.secondDay.lowTemp = fullData.forecast.secondDay.lowTemp
+										this.secondDay.highTemp = fullData.forecast.secondDay.highTemp
 										//thirdDay
 										this.thirdDay.day = (moment.unix(fullData.forecast.thirdDay.day).format('dddd'));
-										this.thirdDay.icon = fullData.forecast.firstDay.icon
-										this.thirdDay.lowTemp = fullData.forecast.firstDay.lowTemp
-										this.thirdDay.highTemp = fullData.forecast.firstDay.highTemp
+										this.thirdDay.icon = fullData.forecast.thirdDay.icon
+										this.thirdDay.lowTemp = fullData.forecast.thirdDay.lowTemp
+										this.thirdDay.highTemp = fullData.forecast.thirdDay.highTemp
 										//fourthDay
 										this.fourthDay.day = (moment.unix(fullData.forecast.fourthDay.day).format('dddd'));
-										this.fourthDay.icon = fullData.forecast.firstDay.icon
-										this.fourthDay.lowTemp = fullData.forecast.firstDay.lowTemp
-										this.fourthDay.highTemp = fullData.forecast.firstDay.highTemp
+										this.fourthDay.icon = fullData.forecast.fourthDay.icon
+										this.fourthDay.lowTemp = fullData.forecast.fourthDay.lowTemp
+										this.fourthDay.highTemp = fullData.forecast.fourthDay.highTemp
 										//fifthDay
 										this.fifthDay.day = (moment.unix(fullData.forecast.fifthDay.day).format('dddd'));
-										this.fifthDay.icon = fullData.forecast.firstDay.icon
-										this.fifthDay.lowTemp = fullData.forecast.firstDay.lowTemp
-										this.fifthDay.highTemp = fullData.forecast.firstDay.highTemp
+										this.fifthDay.icon = fullData.forecast.fifthDay.icon
+										this.fifthDay.lowTemp = fullData.forecast.fifthDay.lowTemp
+										this.fifthDay.highTemp = fullData.forecast.fifthDay.highTemp
 										// console.log(this.day)
 										this.summary = fullData.forecast.summary
 										//lifitie data
@@ -241,12 +223,9 @@ var myRouter = new VueRouter({
 										this.fourSquareVisits = fullData.fourSquareVisits
 										// console.log(this.fourSquareVisits)
 										// console.log(this.fifthDay)
+
 									})
-									// this.requestedLat === this.listofskiareas[i].lat;
-									// this.requestedLng === this.listofskiareas[i].lng;
-									// this.requestedliftieName === this.listofskiareas[i].liftieName;
-									// this.requestedFSID === this.listofskiareas[i].fourSquareID;
-									// console.log(this.listofskiareas[i].fourSquareID)
+
 								}
 							}
 							// console.log(this.listofskiareas);
@@ -265,114 +244,115 @@ var myRouter = new VueRouter({
 var mainVm = new Vue({
     el: '#app',
 	router: myRouter,
-    data: {
-		summary:'',
-		firstDay:{
-			day:'',
-			icon:'',
-			lowTemp:'',
-			highTemp:'',
-		},
-		secondDay:{
-			day:'',
-			icon:'',
-			lowTemp:'',
-			highTemp:'',
-		},
-		thirdDay:{
-			day:'',
-			icon:'',
-			lowTemp:'',
-			highTemp:'',
-		},
-		fourthDay:{
-			day:'',
-			icon:'',
-			lowTemp:'',
-			highTemp:'',
-		},
-		fifthDay:{
-			day:'',
-			icon:'',
-			lowTemp:'',
-			highTemp:'',
-		},
-		lifts:null,
-		snowdepth:null,
-		facebook:null,
-		day:'',
-		snowfall:0,
-		fourSquareVisits:null,
-		testforchild:'itworkedd',
-		listofskiareas: [],
-		skiAreaNames:[],
-		dataForApis: {
-			lat:0,
-			long:0,
-			liftieName:'',
-		}
-	},
+    // data: {
+	// 	summary:'',
+	// 	firstDay:{
+	// 		day:'',
+	// 		icon:'',
+	// 		lowTemp:'',
+	// 		highTemp:'',
+	// 	},
+	// 	secondDay:{
+	// 		day:'',
+	// 		icon:'',
+	// 		lowTemp:'',
+	// 		highTemp:'',
+	// 	},
+	// 	thirdDay:{
+	// 		day:'',
+	// 		icon:'',
+	// 		lowTemp:'',
+	// 		highTemp:'',
+	// 	},
+	// 	fourthDay:{
+	// 		day:'',
+	// 		icon:'',
+	// 		lowTemp:'',
+	// 		highTemp:'',
+	// 	},
+	// 	fifthDay:{
+	// 		day:'',
+	// 		icon:'',
+	// 		lowTemp:'',
+	// 		highTemp:'',
+	// 	},
+	// 	lifts:null,
+	// 	snowdepth:null,
+	// 	facebook:null,
+	// 	day:'',
+	// 	snowfall:0,
+	// 	fourSquareVisits:null,
+	// 	testforchild:'itworkedd',
+	// 	listofskiareas: [],
+	// 	skiAreaNames:[],
+	// 	dataForApis: {
+	// 		lat:0,
+	// 		long:0,
+	// 		liftieName:'',
+	// 	}
+	// },
 	methods: {
-		testmethod: function() {
-			console.log('testmethod worked')
-			$.get('/getsSkiAreas', (skiAreasFromServer) => {
-				// console.log('created the register page')
-				this.listofskiareas = skiAreasFromServer
-				console.log(this.listofskiareas)
 
-				for(var i = 0; i < skiAreasFromServer.length; i++){
-					var skiAreaNamesTemp = [];
-					skiAreaNamesTemp += skiAreasFromServer[i].name;
-					this.skiAreaNames.name = skiAreaNamesTemp
-					console.log(skiAreaNamesTemp)
-					console.log(this.skiAreaNames)
-				}
-				// console.log(skiAreaNames)
-			})
-		},
-		apiCalls: function(data) {
-			console.log(data)
-			$.get('/getdata', (fullData) =>{
+		// testmethod: function() {
+		// 	console.log('testmethod worked')
+		// 	$.get('/getsSkiAreas', (skiAreasFromServer) => {
+		// 		// console.log('created the register page')
+		// 		this.listofskiareas = skiAreasFromServer
+		// 		console.log(this.listofskiareas)
+		//
+		// 		for(var i = 0; i < skiAreasFromServer.length; i++){
+		// 			var skiAreaNamesTemp = [];
+		// 			skiAreaNamesTemp += skiAreasFromServer[i].name;
+		// 			this.skiAreaNames.name = skiAreaNamesTemp
+		// 			console.log(skiAreaNamesTemp)
+		// 			console.log(this.skiAreaNames)
+		// 		}
+		// 		// console.log(skiAreaNames)
+		// 	})
+		// },
+		// apiCalls: function(data) {
+		// 	console.log(data)
+		// 	$.get('/getdata', (fullData) => {
+		// 		// console.log(fullData)
+		// 		console.log('this workeddddd')
+		// 		this.day = new Date(fullData.day)
+		// 		this.firstDay.day = (moment.unix(fullData.forecast.firstDay.day).format('dddd'));
+		// 		this.firstDay.icon = fullData.forecast.firstDay.icon
+		// 		this.firstDay.lowTemp = fullData.forecast.firstDay.lowTemp
+		// 		this.firstDay.highTemp = fullData.forecast.firstDay.highTemp
+		// 		//secondDay
+		// 		this.secondDay.day = (moment.unix(fullData.forecast.secondDay.day).format('dddd'));
+		// 		this.secondDay.icon = fullData.forecast.firstDay.icon
+		// 		this.secondDay.lowTemp = fullData.forecast.firstDay.lowTemp
+		// 		this.secondDay.highTemp = fullData.forecast.firstDay.highTemp
+		// 		//thirdDay
+		// 		this.thirdDay.day = (moment.unix(fullData.forecast.thirdDay.day).format('dddd'));
+		// 		this.thirdDay.icon = fullData.forecast.firstDay.icon
+		// 		this.thirdDay.lowTemp = fullData.forecast.firstDay.lowTemp
+		// 		this.thirdDay.highTemp = fullData.forecast.firstDay.highTemp
+		// 		//fourthDay
+		// 		this.fourthDay.day = (moment.unix(fullData.forecast.fourthDay.day).format('dddd'));
+		// 		this.fourthDay.icon = fullData.forecast.firstDay.icon
+		// 		this.fourthDay.lowTemp = fullData.forecast.firstDay.lowTemp
+		// 		this.fourthDay.highTemp = fullData.forecast.firstDay.highTemp
+		// 		//fifthDay
+		// 		this.fifthDay.day = (moment.unix(fullData.forecast.fifthDay.day).format('dddd'));
+		// 		this.fifthDay.icon = fullData.forecast.firstDay.icon
+		// 		this.fifthDay.lowTemp = fullData.forecast.firstDay.lowTemp
+		// 		this.fifthDay.highTemp = fullData.forecast.firstDay.highTemp
+		// 		// console.log(this.day)
+		// 		this.summary = fullData.forecast.summary
+		// 		this.lifts = "There are " + fullData.lifts.open + " lifts open and  " + fullData.lifts.closed +" closed"
+		// 		//snowfall
+		// 		this.snowfall = fullData.snowfall
+		// 		//foursquare visit counter
+		// 		this.fourSquareVisits = fullData.fourSquareVisits
+		// 		// console.log(this.fourSquareVisits)
+		// 		// console.log(this.fifthDay)
+		// 	})
+		// 	//this get will start the calls to the apis, I will refer tho this get from my component v-on:click='apicalls'
+		// },
 
-				// console.log(fullData)
-				console.log('this workeddddd')
-				this.day = new Date(fullData.day)
-				this.firstDay.day = (moment.unix(fullData.forecast.firstDay.day).format('dddd'));
-				this.firstDay.icon = fullData.forecast.firstDay.icon
-				this.firstDay.lowTemp = fullData.forecast.firstDay.lowTemp
-				this.firstDay.highTemp = fullData.forecast.firstDay.highTemp
-				//secondDay
-				this.secondDay.day = (moment.unix(fullData.forecast.secondDay.day).format('dddd'));
-				this.secondDay.icon = fullData.forecast.firstDay.icon
-				this.secondDay.lowTemp = fullData.forecast.firstDay.lowTemp
-				this.secondDay.highTemp = fullData.forecast.firstDay.highTemp
-				//thirdDay
-				this.thirdDay.day = (moment.unix(fullData.forecast.thirdDay.day).format('dddd'));
-				this.thirdDay.icon = fullData.forecast.firstDay.icon
-				this.thirdDay.lowTemp = fullData.forecast.firstDay.lowTemp
-				this.thirdDay.highTemp = fullData.forecast.firstDay.highTemp
-				//fourthDay
-				this.fourthDay.day = (moment.unix(fullData.forecast.fourthDay.day).format('dddd'));
-				this.fourthDay.icon = fullData.forecast.firstDay.icon
-				this.fourthDay.lowTemp = fullData.forecast.firstDay.lowTemp
-				this.fourthDay.highTemp = fullData.forecast.firstDay.highTemp
-				//fifthDay
-				this.fifthDay.day = (moment.unix(fullData.forecast.fifthDay.day).format('dddd'));
-				this.fifthDay.icon = fullData.forecast.firstDay.icon
-				this.fifthDay.lowTemp = fullData.forecast.firstDay.lowTemp
-				this.fifthDay.highTemp = fullData.forecast.firstDay.highTemp
-				// console.log(this.day)
-				this.summary = fullData.forecast.summary
-				this.lifts = "There are " + fullData.lifts.open + " lifts open and  " + fullData.lifts.closed +" closed"
-				//snowfall
-				this.snowfall = fullData.snowfall
-				//foursquare visit counter
-				this.fourSquareVisits = fullData.fourSquareVisits
-				// console.log(this.fourSquareVisits)
-				// console.log(this.fifthDay)
-			})
-			//this get will start the calls to the apis, I will refer tho this get from my component v-on:click='apicalls'
-		}
 	}
 })
 // how to organize the vue app, global variables, componentRestrictions

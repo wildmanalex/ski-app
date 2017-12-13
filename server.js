@@ -45,7 +45,11 @@ var UserSchema = new mongoose.Schema({
     created: {
         type: Date,
         default: function(){ return new Date()}
-    }
+    },
+	savedAreas: {
+		type: Array,
+		required: false,
+	}
 })
 var User = mongoose.model('User', UserSchema)
 
@@ -302,8 +306,6 @@ app.get('/getdata', function(req, res){
 			// 	console.log(cleanFBData)
 			//foursquare request
 			request(foursquare, function(err, response, fourSquareData){
-				console.log('fdsafdsfasdafdsafdsafdsafdsafdsfdsafdsafdsaf')
-				console.log(fourSquareData)
 				var cleanFourSquareData = JSON.parse(fourSquareData);
 				fullData.fourSquareVisits = cleanFourSquareData.response.venue.stats.visitsCount;
 				// console.log(cleanFourSquareData.response.venue)
@@ -314,8 +316,29 @@ app.get('/getdata', function(req, res){
 		})
 	})
 })
-
-
+app.post('/saveArea', function(req, res){
+	console.log(req.body)
+	let saveArea = req.body;
+	console.log(req.session._id)
+	User.findOneAndUpdate(
+		{_id:req.session._id},
+		{$push: {savedAreas: req.body}},
+		function(err, data){
+			if(err){
+				console.log(err)
+			}
+			console.log(data);
+		});
+})
+app.get('/getSavedAreas', function(req, res) {
+	User.find({_id:req.session._id}, function(err, user){
+		if(err){
+			console.log(err)
+		}
+		console.log(user)
+		res.send(user)
+	})
+})
 
 
 app.listen(8083, function(){

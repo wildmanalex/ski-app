@@ -6,6 +6,28 @@
 .space {
 	height: 2rem;
 }
+											/******  Nav *******/
+.navbar-default {
+	/*color:none;*/
+	background: transparent;
+	/*background: rgba(0,0,0,0.0);*/
+}
+.navbar-expand-lg {
+	background: transparent;
+}
+.navbar-brand {
+	color: #9DCAEB;
+}
+/*.navbar {
+	background-color:none;
+}
+.nav-item {
+	float:right;
+}
+.navbar-nav {
+	position: absolute;
+	right:0%;
+}*/
 											/*******  Register Component ********/
 .registerComponent {
 	width: 100vw;
@@ -239,6 +261,7 @@ video {
 	text-align: center;
 }
 .reportTitle {
+	margin-top: 1rem;
 	color: #9DCAEB;
 }
 .forcastSnow {
@@ -249,10 +272,23 @@ video {
 .forcast {
   width:50%;
 }
-
+.firstForecast h4{
+	display: inline-block;
+	font-size: 1.2rem;
+	color: #9DCAEB;
+}
+.firstForecast p{
+	display: inline-block;
+}
+.firstForecast .temp {
+	display: inline-block;
+}
+/*.firstForecast .temp p {
+	display: inline-block;
+}*/
 /*Snowfall*/
-.snow {
-
+.snow h3{
+	margin-bottom: 2rem;
 }
 .snowfallNum {
 	display: inline-block;
@@ -268,6 +304,9 @@ video {
 }
 .fsData {
   margin-top: 3rem;
+}
+.fsData h3{
+	margin-bottom: 2rem;
 }
 .fsNum {
 	display: inline-block;

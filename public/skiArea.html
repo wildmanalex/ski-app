@@ -11,23 +11,29 @@
 	</div>
 	<div class="container-fluid report">
 		<h1 class='reportTitle'>{{$route.params.location}}</h1>
+		<!-- <h1 class='reportTitle'>{{this.nameForReport}}</h1> -->
 		<div class='space'></div>
 		<div class='row'>
-			<div class='forcast col-lg-6'>
+			<div class='forcast col-sm-12 col-md-6 col-lg-6'>
 				<h3>forecast</h3>
-				<div class="days1">
-					<div class="days2">
-						<ul>
-							<p>{{this.firstDay.day}} {{this.firstDay.icon}} {{this.firstDay.lowTemp}} {{this.firstDay.highTemp}}</p>
-							<p>{{this.secondDay.day}} {{this.secondDay.icon}} {{this.secondDay.lowTemp}} {{this.secondDay.highTemp}}</p>
-							<p>{{this.thirdDay.day}} {{this.thirdDay.icon}} {{this.thirdDay.lowTemp}} {{this.thirdDay.highTemp}}</p>
-							<p>{{this.fourthDay.day}} {{this.fourthDay.icon}} {{this.fourthDay.lowTemp}} {{this.fourthDay.highTemp}}</p>
-							<p>{{this.fifthDay.day}} {{this.fifthDay.icon}} {{this.fifthDay.lowTemp}} {{this.fifthDay.highTemp}}</p>
-						</ul>
+				<p>day - summary - low - high</p>
+					<div class="firstForecast">
+						<h4>{{this.firstDay.day}}</h4> <p>| {{this.firstDay.icon}} | {{this.firstDay.lowTemp}}&#x2109 - {{this.firstDay.highTemp}}&#x2109</p>
 					</div>
-				</div>
+					<div class="firstForecast">
+						<h4>{{this.secondDay.day}}</h4> <p>| {{this.secondDay.icon}} | {{this.secondDay.lowTemp}}&#x2109 - {{this.secondDay.highTemp}}&#x2109</p>
+					</div>
+					<div class="firstForecast">
+						<h4>{{this.thirdDay.day}}</h4> <p>| {{this.thirdDay.icon}} | {{this.thirdDay.lowTemp}}&#x2109 - {{this.thirdDay.highTemp}}&#x2109</p>
+					</div>
+					<div class="firstForecast">
+						<h4>{{this.fourthDay.day}}</h4> <p>| {{this.fourthDay.icon}} | {{this.fourthDay.lowTemp}}&#x2109 - {{this.fourthDay.highTemp}}&#x2109</p>
+					</div>
+					<div class="firstForecast">
+						<h4>{{this.fifthDay.day}}</h4> <p>| {{this.fifthDay.icon}} | {{this.fifthDay.lowTemp}}&#x2109 - {{this.fifthDay.highTemp}}&#x2109</p>
+					</div>
 			</div>
-			<div class='snow col-lg-6'>
+			<div class='snow col-sm-12 col-md-6 col-lg-6'>
 				<h3>snowfall</h3>
 				<div class="snowfallNum">
 					<h4>{{this.snowfall}}</h4>
@@ -38,7 +44,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="fsData col-lg-6">
+			<div class="fsData col-sm-12 col-md-6 col-lg-6">
 				<h3>popularity</h3>
 				<div class="fsNum">
 					<h4>{{this.fourSquareVisits}}</h4>
@@ -47,7 +53,7 @@
 					<p>foursquare users <br/>have been to <br/>this ski area</p>
 				</div>
 			</div>
-			<div class="liftdata col-lg-6">
+			<div class="liftdata col-sm-12 col-md-6 col-lg-6">
 				<h3>lift status</h3>
 				<!-- <p>{{this.lifts}}</p> -->
 				<div class='liftsOpen'>
@@ -60,5 +66,6 @@
 				</div>
 			</div>
 		</div>
+		<button v-on:click='saveArea'>save this ski area</button>
 	</div>
 </div>
