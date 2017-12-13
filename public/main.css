@@ -249,6 +249,7 @@ video {
 .forcast {
   width:50%;
 }
+
 /*Snowfall*/
 .snow {
 
@@ -265,17 +266,23 @@ video {
 .snowfallWords {
 	display: inline-block;
 }
-.fbLiftData {
-  display:flex;
-  flex-direction: row;
-  align-content:stretch;
+.fsData {
+  margin-top: 3rem;
 }
-.facebook {
-  width:50%;
-  margin-top: 5rem;
+.fsNum {
+	display: inline-block;
+	position: relative;
+  	top: 50%;
+  	transform: translateY(-50%);
+}
+.fsNum h4 {
+	color:#9DCAEB;
+}
+.fsWords {
+	display: inline-block;
 }
 .liftdata {
-	margin-top: 5rem;
+	margin-top: 3rem;
 }
 .liftsOpen h4{
 	color: #48C170;

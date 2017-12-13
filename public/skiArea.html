@@ -6,8 +6,6 @@
 				<!-- <source src="http://demosthenes.info/assets/videos/polina.webm" type="video/webm"> -->
 				<source src="breck.mov" type="video/mp4">
 				<!-- <source src="https://www.youtube.com/watch?v=-o0Xan34cT4" type="video/mp4"> -->
-
-
 			</video>
 		</div>
 	</div>
@@ -17,16 +15,20 @@
 		<div class='row'>
 			<div class='forcast col-lg-6'>
 				<h3>forecast</h3>
-				<ul>
-					<li>{{this.firstDay.day}}{{this.firstDay.icon}}{{this.firstDay.lowTemp}}{{this.firstDay.highTemp}}</li>
-					<li>{{this.secondDay.day}}{{this.secondDay.icon}}{{this.secondDay.lowTemp}}{{this.secondDay.highTemp}}</li>
-					<li>{{this.thirdDay.day}}{{this.thirdDay.icon}}{{this.thirdDay.lowTemp}}{{this.thirdDay.highTemp}}</li>
-					<li>{{this.fourthDay.day}}{{this.fourthDay.icon}}{{this.fourthDay.lowTemp}}{{this.fourthDay.highTemp}}</li>
-					<li>{{this.fifthDay.day}}{{this.fifthDay.icon}}{{this.fifthDay.lowTemp}}{{this.fifthDay.highTemp}}</li>
-				</ul>
+				<div class="days1">
+					<div class="days2">
+						<ul>
+							<p>{{this.firstDay.day}} {{this.firstDay.icon}} {{this.firstDay.lowTemp}} {{this.firstDay.highTemp}}</p>
+							<p>{{this.secondDay.day}} {{this.secondDay.icon}} {{this.secondDay.lowTemp}} {{this.secondDay.highTemp}}</p>
+							<p>{{this.thirdDay.day}} {{this.thirdDay.icon}} {{this.thirdDay.lowTemp}} {{this.thirdDay.highTemp}}</p>
+							<p>{{this.fourthDay.day}} {{this.fourthDay.icon}} {{this.fourthDay.lowTemp}} {{this.fourthDay.highTemp}}</p>
+							<p>{{this.fifthDay.day}} {{this.fifthDay.icon}} {{this.fifthDay.lowTemp}} {{this.fifthDay.highTemp}}</p>
+						</ul>
+					</div>
+				</div>
 			</div>
 			<div class='snow col-lg-6'>
-				<h3>Snowfall</h3>
+				<h3>snowfall</h3>
 				<div class="snowfallNum">
 					<h4>{{this.snowfall}}</h4>
 				</div>
@@ -36,10 +38,13 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="fbLiftData col-lg-6">
+			<div class="fsData col-lg-6">
 				<h3>popularity</h3>
-				<div class="facebook">
-					<p>{{this.fourSquareVisits}}</p>
+				<div class="fsNum">
+					<h4>{{this.fourSquareVisits}}</h4>
+				</div>
+				<div class="fsWords">
+					<p>foursquare users <br/>have been to <br/>this ski area</p>
 				</div>
 			</div>
 			<div class="liftdata col-lg-6">
