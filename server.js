@@ -341,6 +341,6 @@ app.get('/getSavedAreas', function(req, res) {
 })
 
 
-app.listen(8083, function(){
+app.listen(80, function(){
     console.log('server listening on port 8083')
 })
