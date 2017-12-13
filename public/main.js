@@ -144,6 +144,8 @@ var myRouter = new VueRouter({
 								highTemp:'',
 							},
 							lifts:null,
+							liftsOpen:null,
+							liftsClosed:null,
 							snowdepth:null,
 							facebook:null,
 							day:'',
@@ -224,6 +226,8 @@ var myRouter = new VueRouter({
 										}
 										else{
 										this.lifts = "There are " + fullData.lifts.open + " lifts open and  " + fullData.lifts.closed +" closed";
+										this.liftsOpen = fullData.lifts.open;
+										this.liftsClosed = fullData.lifts.closed;
 										}
 										//snowfall
 										if(fullData.snowfall === 0){

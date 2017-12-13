@@ -7,9 +7,13 @@
     </div> -->
 <div class="headerVid">
 	<div class='video'>
+		<!-- <iframe src="https://www.youtube.com/embed/-o0Xan34cT4?ecver=2"></iframe> -->
 		<video autoplay loop muted>
 			<!-- <source src="http://demosthenes.info/assets/videos/polina.webm" type="video/webm"> -->
 			<source src="breck.mov" type="video/mp4">
+			<!-- <source src="https://www.youtube.com/watch?v=-o0Xan34cT4" type="video/mp4"> -->
+
+
 		</video>
 	</div>
 </div>
@@ -17,32 +21,100 @@
 	<!-- <div class="header">
 		 <img src="https://static.pexels.com/photos/416714/pexels-photo-416714.jpeg" class="img-fluid"> -->
 		<!-- <img src="https://static.pexels.com/photos/531636/pexels-photo-531636.jpeg" class="img-fluid"> -->
-	<div class="btn-group">
+		<div class="selectArea">
+			<h1>select a ski area</h1>
+			<i class="fa fa-snowflake-o fa-lg" aria-hidden="true"></i>
+		</div>
+	<!-- <div class="btn-group">
 		<button type="button" class="btn btn-primary">select a ski area</button>
-		<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<button type="button"
+		class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+		 data-toggle="dropdown"
+		 aria-haspopup="true"
+		 aria-expanded="false"
+		 >
 			<span class="sr-only">Toggle Dropdown</span>
 		</button>
 		<div class="dropdown-menu">
+			<div class="container">
+
+			</div> -->
 			<!-- <a v-for="area in this.skiAreaNames">{{area.name}}></a> -->
-			<li><router-link to="/skiArea/breck">Breck</router-link></li>
-			<li><router-link to="/skiArea/abasin">Arapahoe Basin</router-link></li>
-			<li><router-link to="/skiArea/monarch">Monarch</router-link></li>
-			<li><router-link to="/skiArea/steamboat">Steamboat Springs</router-link></li>
-			<li><router-link to="/skiArea/keystone">Keystone</router-link></li>
-			<li><router-link to="/skiArea/winter-park">Winter Park</router-link></li>
-			<li><router-link to="/skiArea/aspen-highlands">Aspen Highlands</router-link></li>
-			<li><router-link to="/skiArea/aspen-mountain">Aspen</router-link></li>
-			<li><router-link to="/skiArea/eldora">Eldora</router-link></li>
-			<li><router-link to="/skiArea/loveland">Loveland</router-link></li>
-			<li><router-link to="/skiArea/snowmass">Snowmass</router-link></li>
-			<li><router-link to="/skiArea/copper">Copper Mountain</router-link></li>
-			<li><router-link to="/skiArea/beavercreek">Beaver Creek</router-link></li>
-			<li><router-link to="/skiArea/crested-butte">Crested Butte</router-link></li>
-			<li><router-link to="/skiArea/vail">Vail</router-link></li>
-			<li><router-link to="/skiArea/howelsen">Howelsen Hill</router-link></li>
-			<li><router-link to="/skiArea/wolfcreek">Wolf Creek</router-link></li>
-			<li><router-link to="/skiArea/purgatory">Purgatory</router-link></li>
-			<li><router-link to="/skiArea/telluride">Telluride</router-link></li>
+		<!-- </div>
+	</div> -->
+	<div class="areaGrid">
+
+		<div class="container areaGrid-center">
+		<div class="row">
+			<div class="col-lg-3">
+				<router-link class="router" to="/skiArea/aspen-mountain">Aspen</router-link>
+			</div>
+			<div class="col-lg-3">
+				<router-link to="/skiArea/aspen-highlands" class="router">Aspen Highlands</router-link>
+			</div>
+			<div class="col-lg-3">
+				<router-link to="/skiArea/abasin" class="router">Arapahoe Basin</router-link>
+			</div>
+			<div class="col-lg-3">
+				<router-link to="/skiArea/beavercreek" class="router">Beaver Creek</router-link>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<router-link to="/skiArea/breck" class="router">Breck</router-link>
+			</div>
+			<div class="col-lg-3">
+				<router-link to="/skiArea/copper" class="router">Copper Mountain</router-link>
+			</div>
+			<div class="col-lg-3">
+				<router-link to="/skiArea/crested-butte" class="router">Crested Butte</router-link>
+			</div>
+			<div class="col-lg-3">
+				<router-link to="/skiArea/eldora" class="router">Eldora</router-link>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<router-link to="/skiArea/keystone" class="router">Keystone</router-link>
+			</div>
+			<div class="col-lg-3">
+				<router-link to="/skiArea/howelsen" class="router">Howelsen Hill</router-link>
+			</div>
+			<div class="col-lg-3">
+				<router-link to="/skiArea/loveland" class="router">Loveland</router-link>
+			</div>
+			<div class="col-lg-3">
+				<router-link to="/skiArea/monarch" class="router">Monarch</router-link>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<router-link to="/skiArea/purgatory" class="router">Purgatory</router-link>
+			</div>
+			<div class="col-lg-3">
+				<router-link to="/skiArea/snowmass" class="router">Snowmass</router-link>
+			</div>
+			<div class="col-lg-3">
+				<router-link to="/skiArea/steamboat" class="router">Steamboat Springs</router-link>
+			</div>
+			<div class="col-lg-3">
+				<router-link to="/skiArea/telluride" class="router">Telluride</router-link>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<router-link to="/skiArea/vail" class="router">Vail</router-link>
+			</div>
+			<div class="col-lg-3">
+				<router-link to="/skiArea/winter-park" class="router">Winter Park</router-link>
+			</div>
+			<div class="col-lg-3">
+				<router-link to="/skiArea/wolfcreek" class="router">Wolf Creek</router-link>
+			</div>
+			<div class="col-lg-3">
+				<!-- <router-link to="/skiArea/telluride">Telluride</router-link> -->
+			</div>
+		</div>
 		</div>
 	</div>
 </div>

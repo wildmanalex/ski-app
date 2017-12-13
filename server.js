@@ -257,7 +257,7 @@ app.get('/getdata', function(req, res){
 		else{
 			fullData.snowfall = cleanDarkSkyData.daily.data[1].precipAccumulation
 		}
-		console.log(darkskydata);
+		// console.log(darkskydata);
 		// if(cleanDarkSkyData.daily.data[1].precipAccumulation === 'undefined'){
 		// 	cleanDarkSkyData.daily.data[1].precipAccumulation = 0;
 		// }
@@ -302,6 +302,8 @@ app.get('/getdata', function(req, res){
 			// 	console.log(cleanFBData)
 			//foursquare request
 			request(foursquare, function(err, response, fourSquareData){
+				console.log('fdsafdsfasdafdsafdsafdsafdsafdsfdsafdsafdsaf')
+				console.log(fourSquareData)
 				var cleanFourSquareData = JSON.parse(fourSquareData);
 				fullData.fourSquareVisits = cleanFourSquareData.response.venue.stats.visitsCount;
 				// console.log(cleanFourSquareData.response.venue)

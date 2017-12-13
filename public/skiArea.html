@@ -1,28 +1,59 @@
-<div class="container-fluid report">
-	  <div class="col-lg-12">
-		<h1 class='title'>{{$route.params.location}}</h1>
-		 <div class="forcastSnow">
-		   <div class='forcast'>
-			 <p>Forecast</p>
-				<ul>
-				  <li>{{this.firstDay.day}}{{this.firstDay.icon}}{{this.firstDay.lowTemp}}{{this.firstDay.highTemp}}</li>
-				  <li>{{this.secondDay.day}}{{this.secondDay.icon}}{{this.secondDay.lowTemp}}{{this.secondDay.highTemp}}</li>
-				  <li>{{this.thirdDay.day}}{{this.thirdDay.icon}}{{this.thirdDay.lowTemp}}{{this.thirdDay.highTemp}}</li>
-				  <li>{{this.fourthDay.day}}{{this.fourthDay.icon}}{{this.fourthDay.lowTemp}}{{this.fourthDay.highTemp}}</li>
-				  <li>{{this.fifthDay.day}}{{this.fifthDay.icon}}{{this.fifthDay.lowTemp}}{{this.fifthDay.highTemp}}</li>
-				 </ul>
-		   </div>
-		   <div class='snow'>
-			 <p>There is {{this.snowfall}} centimeters of snow predicted to fall in the next 24 hours</p>
-		   </div>
-		 </div>
-		 <div class="fbLiftData">
-		   <div class="facebook">
-			 <p>{{this.fourSquareVisits}}</p>
-		   </div>
-		   <div class="liftdata">
-			 <p>{{this.lifts}}</p>
-		   </div>
+<div class='skiAreaReport'>
+	<div class="headerVid">
+		<div class='video'>
+			<!-- <iframe src="https://www.youtube.com/embed/-o0Xan34cT4?ecver=2"></iframe> -->
+			<video autoplay loop muted>
+				<!-- <source src="http://demosthenes.info/assets/videos/polina.webm" type="video/webm"> -->
+				<source src="breck.mov" type="video/mp4">
+				<!-- <source src="https://www.youtube.com/watch?v=-o0Xan34cT4" type="video/mp4"> -->
+
+
+			</video>
 		</div>
-	  </div>
+	</div>
+	<div class="container-fluid report">
+		<h1 class='reportTitle'>{{$route.params.location}}</h1>
+		<div class='space'></div>
+		<div class='row'>
+			<div class='forcast col-lg-6'>
+				<h3>forecast</h3>
+				<ul>
+					<li>{{this.firstDay.day}}{{this.firstDay.icon}}{{this.firstDay.lowTemp}}{{this.firstDay.highTemp}}</li>
+					<li>{{this.secondDay.day}}{{this.secondDay.icon}}{{this.secondDay.lowTemp}}{{this.secondDay.highTemp}}</li>
+					<li>{{this.thirdDay.day}}{{this.thirdDay.icon}}{{this.thirdDay.lowTemp}}{{this.thirdDay.highTemp}}</li>
+					<li>{{this.fourthDay.day}}{{this.fourthDay.icon}}{{this.fourthDay.lowTemp}}{{this.fourthDay.highTemp}}</li>
+					<li>{{this.fifthDay.day}}{{this.fifthDay.icon}}{{this.fifthDay.lowTemp}}{{this.fifthDay.highTemp}}</li>
+				</ul>
+			</div>
+			<div class='snow col-lg-6'>
+				<h3>Snowfall</h3>
+				<div class="snowfallNum">
+					<h4>{{this.snowfall}}</h4>
+				</div>
+				<div class="snowfallWords">
+					<p>centimeters of snow <br/>is predicted to fall <br/>in the next 24 hours</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="fbLiftData col-lg-6">
+				<h3>popularity</h3>
+				<div class="facebook">
+					<p>{{this.fourSquareVisits}}</p>
+				</div>
+			</div>
+			<div class="liftdata col-lg-6">
+				<h3>lift status</h3>
+				<!-- <p>{{this.lifts}}</p> -->
+				<div class='liftsOpen'>
+					<h4>{{this.liftsOpen}}</h4>
+					<p>open</p>
+				</div>
+				<div class='liftsClosed'>
+					<h4>{{this.liftsClosed}}</h4>
+					<p>closed</p>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
